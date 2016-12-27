@@ -11,8 +11,11 @@ package modelo;
  */
 public class Supervisor extends Usuario{
     
+    public int incidenciasAsignadas;
+    
     public Supervisor(String usuario, String contraseña){
         super(usuario, contraseña);
+        incidenciasAsignadas = 0;
     }
     
     public void asignarIncidencia(Incidencia incidencia, Tecnico tecnico){
