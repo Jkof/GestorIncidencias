@@ -9,6 +9,21 @@ package modelo;
  *
  * @author DAVID
  */
-public class Supervisor {
+public class Supervisor extends Usuario{
     
+    public Supervisor(String usuario, String contraseña){
+        super(usuario, contraseña);
+    }
+    
+    public void asignarIncidencia(){
+        
+    }
+    
+    public void cerrarIncidencia(){
+        
+    }
+    
+    public void generarInforme(){
+        
+    }
 }

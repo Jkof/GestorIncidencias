@@ -9,6 +9,21 @@ package modelo;
  *
  * @author DAVID
  */
-public class Cliente {
+public class Cliente extends Usuario {
     
+    public Cliente (String usuario, String contraseña){
+        super(usuario, contraseña);
+    }
+    
+    public void crearIncidencia(){
+        
+    }
+    
+    public void notificarCierre(){
+        
+    }
+    
+    public void listarIncidencias(){
+        
+    }
 }
