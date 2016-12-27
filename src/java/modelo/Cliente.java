@@ -19,7 +19,7 @@ public class Cliente extends Usuario {
         
     }
     
-    public void notificarCierre(){
+    public void notificarCierre(Incidencia incidencia){
         
     }
     

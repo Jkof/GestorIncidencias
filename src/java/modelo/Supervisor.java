@@ -15,11 +15,11 @@ public class Supervisor extends Usuario{
         super(usuario, contraseña);
     }
     
-    public void asignarIncidencia(){
+    public void asignarIncidencia(Incidencia incidencia, Tecnico tecnico){
         
     }
     
-    public void cerrarIncidencia(){
+    public void cerrarIncidencia(Incidencia incidencia){
         
     }
     

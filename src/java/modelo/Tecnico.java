@@ -14,7 +14,7 @@ public class Tecnico extends Cliente{
         super(usuario, contraseña);
     }
     
-    public void marcarCierre(){
+    public void marcarCierre(Incidencia incidencia){
         
     }
     
