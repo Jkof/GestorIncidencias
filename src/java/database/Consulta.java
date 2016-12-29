@@ -16,7 +16,8 @@ import java.sql.SQLException;
  */
 public class Consulta {
     
-    private static final String INICIAR_SESION = "SELECT email, password FROM usuario WHERE email= ? AND password= ?";
+    private static final String INICIAR_SESION = "SELECT email, password FROM "
+            + "usuario WHERE email= ? AND password= ?";
     
      /**
      * Comprueba que el usuario y password esten el la base de datos
