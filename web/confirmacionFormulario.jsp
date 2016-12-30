@@ -1,6 +1,6 @@
 <%-- 
-    Document   : vistaFormulario
-    Created on : 28-dic-2016, 12:07:08
+    Document   : vistaConfirmacionFormulario
+    Created on : 28-dic-2016, 12:07:45
     Author     : mario
 --%>
 
@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
+        
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files 
@@ -22,55 +22,51 @@
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/npm.js"></script>
-
+        
         <script type="text/javascript">
-            $(document).ready(
-                    function () {
-                        $('.dropdown-toggle').dropdown();
-                    });
-            );
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+        });
         </script>
         
-        <title>Formulario</title>
+        <title>Confirmar Formulario</title>
     </head>
     <body class="body-login center-block">
         <div class="container well col-md-6 col-md-offset-3">
-            <form role="form" method="post" id="formulario">
+            <form role="form" method="post" id="conformulario">
+                <div class="form-group col-md-6 col-md-offset-3">
+                    <label class="control-label" for="id-incidendia">Identificador incidencia:</label>
+                    <p class="form-control-static">INC_2016_001</p>
+                </div>
+                <div class="form-group col-md-6 col-md-offset-3">
+                    <label class="control-label" for="usuario">Usuario:</label>
+                    <p class="form-control-static">Silvia Arias</p><br><br>
+                </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="inventario">Inventario afectado:</label>
-                    <input type="text" class="form-control" id="inventario" name="inventario" placeholder="Identificador del inventario.">
+                    <p class="form-control-static">PC_Lab1_001</p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="fecha">¿Cuando ocurrió?</label>
-                    <input class="form-control" id="fecha" name="fecha" placeholder="dd/mm/yyyy" type="text"/>
+                    <p class="form-control-static">29/12/2016</p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="prioridad">Prioridad:</label>
-                    <select class="form-control">
-                        <option selected>cualquiera</option>
-                        <option>Alta</option>
-                        <option>Media</option>
-                        <option>Baja</option>
-                    </select>
+                    <p class="form-control-static">Alta</p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="categoria">Categoría:</label>
-                    <select class="form-control">
-                        <option selected>cualquiera</option>
-                        <option>Hardware</option>
-                        <option>Problemas con las comunicaciones</option>
-                        <option>Software básico</option>
-                        <option>Software de aplicaciones</option>
-                    </select>
+                    <p class="form-control-static">Hardware</p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="descripcion">Descripción:</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <p class="form-control-static">Parrafo donde va la descripción 
+                        escrita por el usuario que la crea</p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <br><br>
-                    <button type="submit" class="btn btn-success btn-lg col-lg-offset-0">Entrar</button>
-                    <button type="submit" class="btn btn-success btn-lg col-lg-offset-3">Cancelar</button>
+                    <button type="submit" class="btn btn-success btn-lg col-lg-offset-0">Confirmar</button>
+                    <button type="submit" class="btn btn-success btn-lg col-lg-offset-2">Cancelar</button>
                 </div>
             </form>
         </div>
