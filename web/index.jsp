@@ -44,7 +44,7 @@
             <div class="page-header col-md-6 col-md-offset-3">
                 <h2>Iniciar sesión</h2>
             </div>
-            <form role="form" action="login" method="post" id="login">
+            <form role="form" action="Login" method="post" id="login">
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" maxlength="20" required autofocus>

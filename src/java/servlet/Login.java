@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        System.out.println("Hola Mundo");
     }
 
 }
