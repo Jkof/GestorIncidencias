@@ -35,7 +35,7 @@
     </head>
     <body class="body-login center-block">
         <div class="container well col-md-6 col-md-offset-3">
-            <form role="form" method="post" id="formulario">
+            <form role="form" action="Formulario" method="post" id="formulario">
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="inventario">Inventario afectado:</label>
                     <input type="text" class="form-control" id="inventario" name="inventario" placeholder="Identificador del inventario.">

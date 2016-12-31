@@ -16,6 +16,30 @@
         <servlet-name>SupNavbar</servlet-name>
         <servlet-class>servlet.SupNavbar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Formulario</servlet-name>
+        <servlet-class>servlet.Formulario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Detalle</servlet-name>
+        <servlet-class>servlet.Detalle</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarIncidenciasCliente</servlet-name>
+        <servlet-class>servlet.CargarIncidenciasCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarIncidenciasTecnico</servlet-name>
+        <servlet-class>servlet.CargarIncidenciasTecnico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarIncidenciasSup</servlet-name>
+        <servlet-class>servlet.CargarIncidenciasSup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenerarInforme</servlet-name>
+        <servlet-class>servlet.GenerarInforme</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TecNavbar</servlet-name>
         <url-pattern>/TecNavbar</url-pattern>
@@ -31,6 +55,30 @@
     <servlet-mapping>
         <servlet-name>SupNavbar</servlet-name>
         <url-pattern>/SupNavbar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Formulario</servlet-name>
+        <url-pattern>/Formulario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Detalle</servlet-name>
+        <url-pattern>/Detalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarIncidenciasCliente</servlet-name>
+        <url-pattern>/CargarIncidenciasCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarIncidenciasTecnico</servlet-name>
+        <url-pattern>/CargarIncidenciasTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarIncidenciasSup</servlet-name>
+        <url-pattern>/CargarIncidenciasSup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerarInforme</servlet-name>
+        <url-pattern>/GenerarInforme</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
