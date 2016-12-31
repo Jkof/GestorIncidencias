@@ -27,7 +27,7 @@
         <br>
         
         <center>
-        <div class="btn-group" role="group">
+        <div class="btn-group" role="group" action="TecNavbar">
             <button type="button" class="btn btn-default btn-lg">
                 <span class="glyphicon glyphicon-home"></span>
                 <p>Inicio<br><br></p>

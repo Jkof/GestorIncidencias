@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>TecNavbar</servlet-name>
+        <servlet-class>servlet.TecNavbar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>servlet.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientNavbar</servlet-name>
+        <servlet-class>servlet.ClientNavbar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SupNavbar</servlet-name>
+        <servlet-class>servlet.SupNavbar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TecNavbar</servlet-name>
+        <url-pattern>/TecNavbar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientNavbar</servlet-name>
+        <url-pattern>/ClientNavbar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SupNavbar</servlet-name>
+        <url-pattern>/SupNavbar</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

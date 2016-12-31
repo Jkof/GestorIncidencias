@@ -13,6 +13,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%@include file="WEB-INF/jspf/includes.jspf" %>
+        <script>
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    form.submit();
+                }
+            });
+            $(document).ready(function () {
+                $("#login").validate({
+                    rules: {
+                        usuario: "required",
+                        password: "required"
+                    },
+                    messages: {
+                        usuario: "Introduce tu Mail",
+                        password: "Inserta tu contraseña"
+                    }
+                });
+            });
+        </script>
     </head>
     <body class="body-login center-block">
         <!--Cabecera-->

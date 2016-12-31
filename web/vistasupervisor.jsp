@@ -43,7 +43,7 @@
         <br>
         
         <center>
-        <div class="btn-group" role="group">
+        <div class="btn-group" role="group" action="SupNavbar">
             <button type="button" class="btn btn-default btn-lg">
                 <br>
                 <span class="glyphicon glyphicon-home"></span>
