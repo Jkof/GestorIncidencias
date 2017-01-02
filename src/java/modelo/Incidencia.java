@@ -20,7 +20,7 @@ public class Incidencia {
     private String categoria;
     private Date fechaInicio;
     private Date fechaFin;
-    private Tecnico tecnico;
+    private String tecnico;
     private boolean resuelta;
     private String resolucion;
 
@@ -97,11 +97,11 @@ public class Incidencia {
         this.fechaFin = fechaFin;
     }
 
-    public Tecnico getTecnico() {
+    public String getTecnico() {
         return tecnico;
     }
 
-    public void setTecnico(Tecnico tecnico) {
+    public void setTecnico(String tecnico) {
         this.tecnico = tecnico;
     }
 

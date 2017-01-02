@@ -4,6 +4,7 @@
     Author     : DAVID
 --%>
 
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,8 +22,10 @@
     <body>
         
         <br>
-        
-        <p class="text-right">Iniciada sesión como: Nombre del técnico (Técnico)</p>
+        <%
+            Usuario userHost = (Usuario) session.getAttribute("usuario");
+        %>
+        <p class="text-right">Iniciada sesión como: <%= userHost.getUsuario() + " (" + userHost.getRol()+ ")"%></p>
         
         <br>
         
@@ -32,7 +35,7 @@
                 <span class="glyphicon glyphicon-home"></span>
                 <p>Inicio<br><br></p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='NuevaIncidencia';">
                 <span class="glyphicon glyphicon-file"></span>
                 <p>Nueva<br>Incidencia</p>
             </button>
@@ -44,7 +47,7 @@
                     <span class="glyphicon glyphicon-lock"></span>
                     <p>Incidencias<br>Cerradas</p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='CerrarSesion';">
                     <span class="glyphicon glyphicon-remove-sign"></span>
                     <p>Cerrar Sesión<br><br></p>
             </button>

@@ -44,7 +44,30 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Hola Mundo");
+        String url = "/index.jsp";
+        String usuario = request.getParameter("usuario");
+        String password = request.getParameter("password");
+        if (null != Consulta.iniciarSesion(usuario, password)) {
+            HttpSession session;
+            session = request.getSession();
+            Usuario user = Consulta.iniciarSesion(usuario,password);
+            session.setAttribute("usuario", user);
+            if(user.getRol().equalsIgnoreCase("Cliente")){
+                url = "/vistaCliente.jsp";
+            }
+            if(user.getRol().equalsIgnoreCase("Tecnico")){
+                url = "/vistaTecnico.jsp";
+            }
+            
+            if(user.getRol().equalsIgnoreCase("Supervisor")){
+                url = "/vistasupervisor.jsp";
+            }
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
     }
 
 }

@@ -12,10 +12,12 @@ package modelo;
 public class Usuario {
     private String usuario;
     private String contraseña;
+    private String rol;
     
-    public Usuario(String usuario, String contraseña){
+    public Usuario(String usuario, String contraseña, String rol){
         this.usuario = usuario;
         this.contraseña = contraseña;
+        this.rol = rol;
     }
 
     public String getUsuario() {
@@ -33,6 +35,16 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
+    
     
     public void iniciarSesion(String usuario, String contraseña){
         

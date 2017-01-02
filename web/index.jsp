@@ -54,9 +54,6 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                 </div>
                 <button type="submit" class="btn btn-success btn-lg col-md-6 col-md-offset-3">Entrar</button>
-                <% if (request.getAttribute("error") != null) { %>
-                    <p class="text-danger"><%= request.getAttribute("error") %></p>
-                <% } %>
             </form>
         </div>
     </body>

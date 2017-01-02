@@ -10,18 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-        
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files 
-        as needed -->
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/npm.js"></script>
+        <%@include file="WEB-INF/jspf/includes.jspf" %>
         
         <script type="text/javascript">
         $(document).ready(function () {

@@ -3,6 +3,7 @@ package database;
 import java.sql.*;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 /**
  * Piscina de conexiones utilizada para la conexion a la base de datos
@@ -13,13 +14,14 @@ public class ConnectionPool {
 
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
-    private static final String RUTA_BD = "java:/comp/env/jdbc/none";
+    private static final String RUTA_BD = "java:/comp/env/jdbc/gestorincidencias";
 
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
             dataSource = (DataSource) ic.lookup(RUTA_BD);
-        } catch (Exception e) {
+            System.out.println(dataSource);
+        } catch (NamingException e) {
             e.printStackTrace();
         }
     }
@@ -27,6 +29,7 @@ public class ConnectionPool {
     public static ConnectionPool getInstance() {
         if (pool == null) {
             pool = new ConnectionPool();
+            System.out.println(dataSource);
         }
         return pool;
     }

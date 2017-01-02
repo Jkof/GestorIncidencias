@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import modelo.Usuario;
 
 /**
  *
@@ -16,8 +17,8 @@ import java.sql.SQLException;
  */
 public class Consulta {
     
-    private static final String INICIAR_SESION = "SELECT email, password FROM "
-            + "usuario WHERE email= ? AND password= ?";
+    private static final String INICIAR_SESION = "SELECT * FROM "
+            + "usuario WHERE nombre= ? AND password= ?";
     
      /**
      * Comprueba que el usuario y password esten el la base de datos
@@ -26,18 +27,26 @@ public class Consulta {
      * @param password la clave del usuario
      * @return true si el usuario se encuentra, false en caso contrario
      */
-    public static boolean iniciarSesion(String usuario, String password) {
+    public static Usuario iniciarSesion(String usuario, String password) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
+        Usuario sesion = null;
         PreparedStatement ps;
         try {
             ps = connection.prepareStatement(INICIAR_SESION);
             ps.setString(1, usuario);
             ps.setString(2, password);
-            ResultSet sesion = ps.executeQuery();
-            return sesion.first();
+            ResultSet resultado = ps.executeQuery();
+            if(resultado.first()){
+                String rol = resultado.getString(3);
+                sesion = new Usuario(usuario,password,rol);
+                return sesion;
+            }
+            else{
+                return sesion;
+            }
         } catch (SQLException e) {
-            return false;
+            return null;
         } finally {
             pool.freeConnection(connection);
         }

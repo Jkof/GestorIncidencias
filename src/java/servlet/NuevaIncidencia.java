@@ -7,6 +7,7 @@ package servlet;
 
 import database.Consulta;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +20,9 @@ import modelo.Usuario;
  *
  * @author DAVID
  */
-public class Formulario extends HttpServlet {
+public class NuevaIncidencia extends HttpServlet {
 
-      @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
@@ -43,27 +44,10 @@ public class Formulario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String url = "/formulario.jsp";
-        String inventario = request.getParameter("inventario");
-        String fecha = request.getParameter("fecha");
-        String prioridad = request.getParameter("prioridad");
-        String categoria = request.getParameter("categoria");
-        String descripcion = request.getParameter("descripcion");
-        System.out.println(inventario+" "+fecha+" "+prioridad+" "+categoria+" "+descripcion);
-        HttpSession sesion= (HttpSession) request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-        if(usuario.getRol().equalsIgnoreCase("Cliente")){
-            url = "/vistaCliente.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-        }
-        if(usuario.getRol().equalsIgnoreCase("Tecnico")){
-            url = "/vistaTecnico.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
-        }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
+
+
 }
