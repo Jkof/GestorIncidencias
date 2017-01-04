@@ -7,12 +7,14 @@ package servlet;
 
 import database.Consulta;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Incidencia;
 import modelo.Usuario;
 
 /**
@@ -50,16 +52,22 @@ public class Login extends HttpServlet {
         if (null != Consulta.iniciarSesion(usuario, password)) {
             HttpSession session;
             session = request.getSession();
+            ArrayList<Incidencia> incidencias;
             Usuario user = Consulta.iniciarSesion(usuario,password);
             session.setAttribute("usuario", user);
             if(user.getRol().equalsIgnoreCase("Cliente")){
+                incidencias = Consulta.incidenciaUsuario(usuario);
+                session.setAttribute("incidencias", incidencias);
                 url = "/vistaCliente.jsp";
             }
             if(user.getRol().equalsIgnoreCase("Tecnico")){
+                incidencias = Consulta.incidenciaTecnico(usuario);
+                session.setAttribute("incidencias", incidencias);
                 url = "/vistaTecnico.jsp";
             }
             
             if(user.getRol().equalsIgnoreCase("Supervisor")){
+                
                 url = "/vistasupervisor.jsp";
             }
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

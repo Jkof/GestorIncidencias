@@ -50,7 +50,9 @@ public class Formulario extends HttpServlet {
         String prioridad = request.getParameter("prioridad");
         String categoria = request.getParameter("categoria");
         String descripcion = request.getParameter("descripcion");
-        System.out.println(inventario+" "+fecha+" "+prioridad+" "+categoria+" "+descripcion);
+        
+        
+        
         HttpSession sesion= (HttpSession) request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
         if(usuario.getRol().equalsIgnoreCase("Cliente")){

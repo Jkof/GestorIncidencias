@@ -17,18 +17,6 @@
         <servlet-class>servlet.Detalle</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CargarIncidenciasCliente</servlet-name>
-        <servlet-class>servlet.CargarIncidenciasCliente</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CargarIncidenciasTecnico</servlet-name>
-        <servlet-class>servlet.CargarIncidenciasTecnico</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CargarIncidenciasSup</servlet-name>
-        <servlet-class>servlet.CargarIncidenciasSup</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GenerarInforme</servlet-name>
         <servlet-class>servlet.GenerarInforme</servlet-class>
     </servlet>
@@ -39,6 +27,30 @@
     <servlet>
         <servlet-name>NuevaIncidencia</servlet-name>
         <servlet-class>servlet.NuevaIncidencia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasClienteAbiertas</servlet-name>
+        <servlet-class>servlet.IncidenciasClienteAbiertas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InicioCliente</servlet-name>
+        <servlet-class>servlet.InicioCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasClienteCerradas</servlet-name>
+        <servlet-class>servlet.IncidenciasClienteCerradas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InicioTecnico</servlet-name>
+        <servlet-class>servlet.InicioTecnico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasCerradasTecnico</servlet-name>
+        <servlet-class>servlet.IncidenciasCerradasTecnico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasAsignadasTecnico</servlet-name>
+        <servlet-class>servlet.IncidenciasAsignadasTecnico</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -57,18 +69,6 @@
         <url-pattern>/Detalle</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CargarIncidenciasCliente</servlet-name>
-        <url-pattern>/CargarIncidenciasCliente</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CargarIncidenciasTecnico</servlet-name>
-        <url-pattern>/CargarIncidenciasTecnico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CargarIncidenciasSup</servlet-name>
-        <url-pattern>/CargarIncidenciasSup</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>GenerarInforme</servlet-name>
         <url-pattern>/GenerarInforme</url-pattern>
     </servlet-mapping>
@@ -79,6 +79,30 @@
     <servlet-mapping>
         <servlet-name>NuevaIncidencia</servlet-name>
         <url-pattern>/NuevaIncidencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasClienteAbiertas</servlet-name>
+        <url-pattern>/IncidenciasClienteAbiertas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioCliente</servlet-name>
+        <url-pattern>/InicioCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasClienteCerradas</servlet-name>
+        <url-pattern>/IncidenciasClienteCerradas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioTecnico</servlet-name>
+        <url-pattern>/InicioTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasCerradasTecnico</servlet-name>
+        <url-pattern>/IncidenciasCerradasTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasAsignadasTecnico</servlet-name>
+        <url-pattern>/IncidenciasAsignadasTecnico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

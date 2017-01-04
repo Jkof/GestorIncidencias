@@ -4,6 +4,8 @@
     Author     : DAVID
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Incidencia"%>
 <%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,7 +33,7 @@
         
         <center>
         <div class="btn-group" role="group" action="ClientNavbar">
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='InicioCliente';">
                 <span class="glyphicon glyphicon-home"></span>
                 <p>Inicio<br><br></p>
             </button>
@@ -39,11 +41,11 @@
                 <span class="glyphicon glyphicon-file"></span>
                 <p>Nueva<br>Incidencia</p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='IncidenciasClienteAbiertas';">
                 <span class="glyphicon glyphicon-folder-open"></span>
                 <p>Incidencias Personales<br>Abiertas</p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='IncidenciasClienteCerradas';">
                     <span class="glyphicon glyphicon-lock"></span>
                     <p>Incidencias Personales<br>Cerradas</p>
             </button>
@@ -94,6 +96,10 @@
         </div>
         <div class="col-md-2"></div>
         <br><br><br><br><br><br><br><br><br>
+        <%
+           ArrayList<Incidencia> incidencias = (ArrayList) session.getAttribute("incidencias");
+        %>
+        
         
         <table class="table table-bordered">
             <tr class="text-center">
@@ -104,62 +110,24 @@
                 <td>Fecha de cierre</td>
                 <td>Resumen</td>
             </tr>
+            <%for(int i = 0;i<incidencias.size();i++){%>
+            <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Alta")){%>    
             <tr class="text-center danger">
-                <td>1</td>
-                <td>Alta</td>
-                <td><a href="#">Solicitar Cierre</a></td>
-                <td>30/11/2016</td>
-                <td>Por Cerrar</td>
-                <td>Texto en el que va el resumen</td>
-            </tr>
-            <tr class="text-center success">
-                <td>2</td>
-                <td>Baja</td>
-                <td><a href="#">Solicitar Cierre</a></td>
-                <td>12/11/2016</td>
-                <td>Por Resolver</td>
-                <td>Texto en el que va el resumen</td>
-            </tr>
+            <%}%>
+            <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Media")){%>    
             <tr class="text-center warning">
-                <td>3</td>
-                <td>Media</td>
-                <td>Resuelta</td>
-                <td>03/11/2016</td>
-                <td>18/11/2016</td>
-                <td>Texto en el que va el resumen</td>
+            <%}%>
+            <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Baja")){%>    
+            <tr class="text-center success">
+            <%}%>
+                <td><%=incidencias.get(i).getIdentificador()%></td>
+                <td><%=incidencias.get(i).getPrioridad()%></td>
+                <td><%=incidencias.get(i).isResuelta()%></td>
+                <td><%=incidencias.get(i).getFechaInicio()%></td>
+                <td><%=incidencias.get(i).getFechaFin()%></td>
+                <td><%=incidencias.get(i).getDescripcion()%></td>
             </tr>
-            <tr class="text-center">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="text-center">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="text-center">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="text-center">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <%}%>
         </table>
         
         <div class="panel panel-default" style="background-color: lightgray;">

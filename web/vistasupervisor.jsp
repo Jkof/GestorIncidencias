@@ -69,17 +69,17 @@
     
         <br><br>
     
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
                         <center>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <br>Palabras Clave<br><br>
                             <input type="text" class="form-control">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <br>Técnico<br><br>
                             <select class="form-control" style="width: 130px;">
                                 <option selected>cualquiera</option>
@@ -88,7 +88,7 @@
                                 <option>Técnico 3</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <br>Estado<br><br>
                             <select class="form-control" style="width: 130px;">
                                 <option selected>cualquiera</option>
@@ -97,7 +97,7 @@
                                 <option>Resuelta</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <br>Prioridad<br><br>
                             <select class="form-control" style="width: 130px;">
                                 <option selected>cualquiera</option>
@@ -106,7 +106,7 @@
                                 <option>Baja</option>
                             </select>
                         </div>
-                            <div class="col-sm-1"><br><br><br><button type="button" class="btn btn-default btn-sm">Buscar</button></div>
+                            <div class="col-sm-1 col-md-offset-1"><br><br><br><button type="button" class="btn btn-default btn-sm">Buscar</button></div>
                             <div class="col-sm-1"><br><br><br><button type="button" class="btn btn-default btn-sm">Limpiar</button></div>
                         </center>
                     </div>

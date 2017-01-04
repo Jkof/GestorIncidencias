@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import modelo.Incidencia;
 import modelo.Usuario;
 
 /**
@@ -19,6 +21,16 @@ public class Consulta {
     
     private static final String INICIAR_SESION = "SELECT * FROM "
             + "usuario WHERE nombre= ? AND password= ?";
+    private static final String INCIDENCIA_CLIENTE = "SELECT * FROM "
+            + "incidencia WHERE usuario=?";
+    private static final String LISTAR_INCIDENCIAS_PERSONALES_ABIERTAS = "SELECT"
+            + " * FROM incidencia WHERE usuario = ? AND resuelta = 0 AND fechaCierre is NULL";
+    private static final String LISTAR_INCIDENCIAS_PERSONALES_CERRADAS = "SELECT"
+            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NOT NULL";
+    private static final String LISTAR_INCIDENCIAS_ASIGNADAS = "SELECT * "
+            + "FROM incidencia WHERE tecnico = ? AND resuelta = 0 AND fechaCierre is NULL";
+    private static final String LISTAR_INCIDENCIAS_CERRADAS = "SELECT"
+            + " * FROM incidencia WHERE resuelta = 1 AND fechaCierre is NOT NULL";
     
      /**
      * Comprueba que el usuario y password esten el la base de datos
@@ -50,5 +62,249 @@ public class Consulta {
         } finally {
             pool.freeConnection(connection);
         }
+    }
+    public static ArrayList<Incidencia> incidenciaUsuario(String usuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidencias = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(INCIDENCIA_CLIENTE);
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidencias.add(incidencia);
+                }
+                System.out.println(incidencias.size());
+                
+                return incidencias;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static ArrayList<Incidencia> incidenciaAbiertaUsuario(String usuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(LISTAR_INCIDENCIAS_PERSONALES_ABIERTAS);
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidenciasAbiertas.add(incidencia);
+                }
+                System.out.println(incidenciasAbiertas.size());
+                
+                return incidenciasAbiertas;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static ArrayList<Incidencia> incidenciaCerradaUsuario(String usuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(LISTAR_INCIDENCIAS_PERSONALES_CERRADAS);
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidenciasAbiertas.add(incidencia);
+                }
+                System.out.println(incidenciasAbiertas.size());
+                
+                return incidenciasAbiertas;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static ArrayList<Incidencia> incidenciaTecnico(String usuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(INCIDENCIA_CLIENTE);
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidenciasAbiertas.add(incidencia);
+                }
+                System.out.println(incidenciasAbiertas.size());
+                
+                return incidenciasAbiertas;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }    
+    }
+    
+    public static ArrayList<Incidencia> incidenciaAsignadaTecnico(String usuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(LISTAR_INCIDENCIAS_ASIGNADAS);
+            ps.setString(1, usuario);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidenciasAbiertas.add(incidencia);
+                }
+                System.out.println(incidenciasAbiertas.size());
+                
+                return incidenciasAbiertas;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }    
+    }
+    
+    public static ArrayList<Incidencia> incidenciaCerrada() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Incidencia incidencia;
+        
+        ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(LISTAR_INCIDENCIAS_CERRADAS);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+            
+                  incidenciasAbiertas.add(incidencia);
+                }
+                System.out.println(incidenciasAbiertas.size());
+                
+                return incidenciasAbiertas;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }    
     }
 }

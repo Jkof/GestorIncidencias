@@ -5,20 +5,25 @@
  */
 package servlet;
 
+import database.Consulta;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Incidencia;
+import modelo.Usuario;
 
 /**
  *
  * @author DAVID
  */
-public class NuevaIncidencia extends HttpServlet {
+public class IncidenciasClienteAbiertas extends HttpServlet {
 
-   @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
@@ -40,10 +45,21 @@ public class NuevaIncidencia extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/formulario.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        String url = "/vistaCliente.jsp";
+        
+        HttpSession sesion= (HttpSession) request.getSession();
+        ArrayList <Incidencia> incidencias;
+        Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+        incidencias = Consulta.incidenciaAbiertaUsuario(usuario.getUsuario());
+        sesion.setAttribute("incidencias", incidencias);
+        if(usuario.getRol().equalsIgnoreCase("Cliente")){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
+        else{
+            url = "/vistaTecnico.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
     }
-
-
 }
