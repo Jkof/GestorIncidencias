@@ -1,6 +1,6 @@
 <%-- 
-    Document   : vistacyt
-    Created on : 26-dic-2016, 12:25:55
+    Document   : vistaSupervisor
+    Created on : 29-dic-2016, 13:27:26
     Author     : DAVID
 --%>
 
@@ -17,39 +17,52 @@
         });
         </script>
         
-        <title>Cliente</title>
+        <title>Supervisor</title>
     </head>
     <body>
-        
         <br>
         <%
             Usuario userHost = (Usuario) session.getAttribute("usuario");
         %>
         <p class="text-right">Iniciada sesión como: <%= userHost.getUsuario() + " (" + userHost.getRol()+ ")"%></p>
-        
         <br>
         
         <center>
-        <div class="btn-group" role="group" action="ClientNavbar">
+        <div class="btn-group" role="group">
             <button type="button" class="btn btn-default btn-lg">
+                <br>
                 <span class="glyphicon glyphicon-home"></span>
-                <p>Inicio<br><br></p>
+                <p>Inicio<br></p>
             </button>
-            <button type="button" class="btn btn-default btn-lg" onclick="location.href='NuevaIncidencia';">
-                <span class="glyphicon glyphicon-file"></span>
-                <p>Nueva<br>Incidencia</p>
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='GenerarInforme';">
+                <br>
+                <span class="glyphicon glyphicon-home"></span>
+                <p>Generar Informes<br></p>
             </button>
             <button type="button" class="btn btn-default btn-lg">
+                <br>
                 <span class="glyphicon glyphicon-folder-open"></span>
-                <p>Incidencias Personales<br>Abiertas</p>
+                <p>Incidencias Abiertas<br></p>
             </button>
             <button type="button" class="btn btn-default btn-lg">
-                    <span class="glyphicon glyphicon-lock"></span>
-                    <p>Incidencias Personales<br>Cerradas</p>
+                <br>
+                <span class="glyphicon glyphicon-lock"></span>
+                <p>Incidencias Cerradas<br></p>
+            </button>
+            <button type="button" class="btn btn-default btn-lg">
+                <br>
+                <span class="glyphicon glyphicon-user"></span>
+                <p>Listado por Clientes<br></p>
+            </button>
+            <button type="button" class="btn btn-default btn-lg">
+                <br>
+                <span class="glyphicon glyphicon-wrench"></span>
+                <p>Listado por Técnicos<br></p>
             </button>
             <button type="button" class="btn btn-default btn-lg" onclick="location.href='CerrarSesion';">
-                    <span class="glyphicon glyphicon-remove-sign"></span>
-                    <p>Cerrar Sesión<br><br></p>
+                <br>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                <p>Cerrar Sesión<br></p>
             </button>
         </div>
         </center>
@@ -65,6 +78,15 @@
                         <div class="col-sm-3">
                             <br>Palabras Clave<br><br>
                             <input type="text" class="form-control">
+                        </div>
+                        <div class="col-sm-3">
+                            <br>Técnico<br><br>
+                            <select class="form-control" style="width: 130px;">
+                                <option selected>cualquiera</option>
+                                <option>Técnico 1</option>
+                                <option>Técnico 2</option>
+                                <option>Técnico 3</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
                             <br>Estado<br><br>
@@ -93,6 +115,7 @@
             </div>
         </div>
         <div class="col-md-2"></div>
+        
         <br><br><br><br><br><br><br><br><br>
         
         <table class="table table-bordered">

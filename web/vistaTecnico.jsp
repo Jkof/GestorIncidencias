@@ -1,22 +1,16 @@
+<%-- 
+    Document   : vistaTecnico
+    Created on : 29-dic-2016, 12:41:16
+    Author     : DAVID
+--%>
+
+<%@page import="modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-        
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files 
-        as needed -->
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/npm.js"></script>
-        
+        <%@include file="WEB-INF/jspf/includes.jspf"%>
         <script type="text/javascript">
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
@@ -28,18 +22,20 @@
     <body>
         
         <br>
-        
-        <p class="text-right">Iniciada sesión como: Nombre del técnico (Técnico)</p>
+        <%
+            Usuario userHost = (Usuario) session.getAttribute("usuario");
+        %>
+        <p class="text-right">Iniciada sesión como: <%= userHost.getUsuario() + " (" + userHost.getRol()+ ")"%></p>
         
         <br>
         
         <center>
-        <div class="btn-group" role="group">
+        <div class="btn-group" role="group" action="TecNavbar">
             <button type="button" class="btn btn-default btn-lg">
                 <span class="glyphicon glyphicon-home"></span>
                 <p>Inicio<br><br></p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='NuevaIncidencia';">
                 <span class="glyphicon glyphicon-file"></span>
                 <p>Nueva<br>Incidencia</p>
             </button>
@@ -51,7 +47,7 @@
                     <span class="glyphicon glyphicon-lock"></span>
                     <p>Incidencias<br>Cerradas</p>
             </button>
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='CerrarSesion';">
                     <span class="glyphicon glyphicon-remove-sign"></span>
                     <p>Cerrar Sesión<br><br></p>
             </button>
