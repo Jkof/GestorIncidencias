@@ -67,7 +67,8 @@ public class Login extends HttpServlet {
             }
             
             if(user.getRol().equalsIgnoreCase("Supervisor")){
-                
+                incidencias = Consulta.incidenciaSupervisor();
+                session.setAttribute("incidencias", incidencias);
                 url = "/vistasupervisor.jsp";
             }
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

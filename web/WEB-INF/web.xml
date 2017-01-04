@@ -52,6 +52,26 @@
         <servlet-name>IncidenciasAsignadasTecnico</servlet-name>
         <servlet-class>servlet.IncidenciasAsignadasTecnico</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InicioSupervisor</servlet-name>
+        <servlet-class>servlet.InicioSupervisor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasAbiertas</servlet-name>
+        <servlet-class>servlet.IncidenciasAbiertas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciasCerradas</servlet-name>
+        <servlet-class>servlet.IncidenciasCerradas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciaPorTecnico</servlet-name>
+        <servlet-class>servlet.IncidenciaPorTecnico</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncidenciaPorUsuario</servlet-name>
+        <servlet-class>servlet.IncidenciaPorUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -103,6 +123,26 @@
     <servlet-mapping>
         <servlet-name>IncidenciasAsignadasTecnico</servlet-name>
         <url-pattern>/IncidenciasAsignadasTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioSupervisor</servlet-name>
+        <url-pattern>/InicioSupervisor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasAbiertas</servlet-name>
+        <url-pattern>/IncidenciasAbiertas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciasCerradas</servlet-name>
+        <url-pattern>/IncidenciasCerradas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciaPorTecnico</servlet-name>
+        <url-pattern>/IncidenciaPorTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncidenciaPorUsuario</servlet-name>
+        <url-pattern>/IncidenciaPorUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

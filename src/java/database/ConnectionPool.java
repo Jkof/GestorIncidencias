@@ -20,7 +20,6 @@ public class ConnectionPool {
         try {
             InitialContext ic = new InitialContext();
             dataSource = (DataSource) ic.lookup(RUTA_BD);
-            System.out.println(dataSource);
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -29,7 +28,6 @@ public class ConnectionPool {
     public static ConnectionPool getInstance() {
         if (pool == null) {
             pool = new ConnectionPool();
-            System.out.println(dataSource);
         }
         return pool;
     }
