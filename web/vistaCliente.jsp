@@ -95,12 +95,14 @@
             </div>
         </div>
         <div class="col-md-2"></div>
+        
         <br><br><br><br><br><br><br><br><br>
+        
         <%
            ArrayList<Incidencia> incidencias = (ArrayList) session.getAttribute("incidencias");
+           int j, k, pagina=1;
+           Double maxPaginas = Math.ceil(incidencias.size()/10.0);
         %>
-        
-        
         <table class="table table-bordered">
             <tr class="text-center">
                 <td>Id</td>
@@ -110,7 +112,17 @@
                 <td>Fecha de cierre</td>
                 <td>Resumen</td>
             </tr>
-            <%for(int i = 0;i<incidencias.size();i++){%>
+            <%  if(incidencias.size()<10){
+                    j = 0;}
+                else{
+                    j = pagina*10-10;}
+            
+                if( (incidencias.size() - j) < 10 ){
+                    k = incidencias.size()-j;}
+                else{
+                    k = 10;}
+            
+            for(int i = j; i<(j+k); i++){%>
             <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Alta")){%>    
             <tr class="text-center danger">
             <%}%>
@@ -130,15 +142,22 @@
             <%}%>
         </table>
         
-        <div class="panel panel-default" style="background-color: lightgray;">
-            <center>
+        <center>
+        <div class="btn-group" role="group" action="ClientNavbar"style="background-color: lightgray;">
             <button type="button" class="btn btn-default btn-xs"><<</button>
             <button type="button" class="btn btn-default btn-xs"><</button>
-            <input type="text" class="text-center" style="width: 25px;" maxlength="2">
+            <%for(int i = 1; i <= maxPaginas; i++){
+                if(i == pagina){%>
+                    <button type="button" class="btn btn-info btn-xs "><%=i%></button>
+                <%}else{%>
+                    <button type="button" class="btn btn-default btn-xs"><%=i%></button>
+            <%}}%>
             <button type="button" class="btn btn-default btn-xs">></button>
             <button type="button" class="btn btn-default btn-xs">>></button>
-            </center>
         </div>
+        </center>
         
+        <br>
+            
     </body>
 </html>

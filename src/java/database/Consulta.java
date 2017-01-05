@@ -24,7 +24,7 @@ public class Consulta {
     private static final String INCIDENCIA_CLIENTE = "SELECT * FROM "
             + "incidencia WHERE usuario=?";
     private static final String LISTAR_INCIDENCIAS_PERSONALES_ABIERTAS = "SELECT"
-            + " * FROM incidencia WHERE usuario = ? fechaCierre is NULL";
+            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NULL";
     private static final String LISTAR_INCIDENCIAS_PERSONALES_CERRADAS = "SELECT"
             + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NOT NULL";
     private static final String LISTAR_INCIDENCIAS_ASIGNADAS = "SELECT * "
