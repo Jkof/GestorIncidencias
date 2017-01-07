@@ -107,9 +107,25 @@
         <br><br><br><br><br><br><br><br><br>
         
         <%
-           ArrayList<Incidencia> incidencias = (ArrayList) session.getAttribute("incidencias");
+            ArrayList<Incidencia> incidencias = (ArrayList) session.getAttribute("incidencias");
+            
+            int maxPaginas = (int)Math.ceil(incidencias.size()/10.0);
+            
+            int j, k, pagina;
+            
+            if(request.getParameter("pagina") == null)
+                pagina = 1;
+            else if(request.getParameter("pagina") != null 
+                    && Integer.parseInt(request.getParameter("pagina")) >= 1 
+                    && Integer.parseInt(request.getParameter("pagina")) <= maxPaginas)
+                pagina = Integer.parseInt(request.getParameter("pagina"));
+            else if( Integer.parseInt(request.getParameter("pagina")) < 1 )
+                pagina = 1;
+            else if( Integer.parseInt(request.getParameter("pagina")) > maxPaginas )
+                pagina = maxPaginas;
+            else
+                pagina = 1;
         %>
-        
         <table class="table table-bordered">
             <tr class="text-center">
                 <td>Id</td>
@@ -119,7 +135,17 @@
                 <td>Fecha de cierre</td>
                 <td>Resumen</td>
             </tr>
-            <%for(int i = 0;i<incidencias.size();i++){%>
+            <%  if(incidencias.size()<10){
+                    j = 0;}
+                else{
+                    j = pagina*10-10;}
+            
+                if( (incidencias.size() - j) < 10 ){
+                    k = incidencias.size()-j;}
+                else{
+                    k = 10;}
+            
+            for(int i = j; i<(j+k); i++){%>
             <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Alta")){%>    
             <tr class="text-center danger">
             <%}%>
@@ -139,15 +165,24 @@
             <%}%>
         </table>
         
-        <div class="panel panel-default" style="background-color: lightgray;">
-            <center>
-            <button type="button" class="btn btn-default btn-xs"><<</button>
-            <button type="button" class="btn btn-default btn-xs"><</button>
-            <input type="text" class="text-center" style="width: 25px;" maxlength="2">
-            <button type="button" class="btn btn-default btn-xs">></button>
-            <button type="button" class="btn btn-default btn-xs">>></button>
-            </center>
-        </div>
+        <center>
+            <form method="POST" action="vistaCliente.jsp">
+                <div class="btn-group" role="group" action="ClientNavbar">
+                    <button type="submit" name="pagina" class="btn btn-default btn-xs" value="1"><<</button>
+                    <button type="submit" name="pagina" class="btn btn-default btn-xs" value="<%=(pagina-1)%>"><</button>
+                    <%for(int i = 1; i <= maxPaginas; i++){
+                        if(i == pagina){%>
+                            <button type="submit" class="btn btn-info btn-xs "><%=i%></button>
+                        <%}else{%>
+                            <button type="submit" name="pagina" value="<%=i%>" class="btn btn-default btn-xs"><%=i%></button>
+                    <%}}%>
+                    <button type="submit" name="pagina" class="btn btn-default btn-xs" value="<%=(pagina+1)%>">></button>
+                    <button type="submit" name="pagina" class="btn btn-default btn-xs" value="<%=maxPaginas%>">>></button>
+                </div>
+            </form>
+        </center>
         
+        <br>
+            
     </body>
 </html>
