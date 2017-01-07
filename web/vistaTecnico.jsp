@@ -33,7 +33,7 @@
         
         <center>
         <div class="btn-group" role="group" action="TecNavbar">
-            <button type="button" class="btn btn-default btn-lg">
+            <button type="button" class="btn btn-default btn-lg" onclick="location.href='InicioTecnico';">
                 <span class="glyphicon glyphicon-home"></span>
                 <p>Inicio<br><br></p>
             </button>
@@ -159,13 +159,19 @@
                 <td><%=incidencias.get(i).getPrioridad()%></td>
                 <%if(incidencias.get(i).isResuelta()){%>    
                     <td>Resuelta</td>
-                <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario()) && incidencias.get(i).getFechaFin()==null){%>    
                     <td><a href="">Resolver</a></td>
                 <%}else{%>
                     <td>Sin resolver</td>
                 <%}%>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
-                <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%if(incidencias.get(i).getFechaFin() != null){%>    
+                    <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%}else if(incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())||incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <td><a href="">Solicitar cierre</a></td>
+                <%}else{%>
+                    <td>Cerrada</td>
+                <%}%>
                 <td><%=incidencias.get(i).getDescripcion()%></td>
             </tr>
             <%}%>
