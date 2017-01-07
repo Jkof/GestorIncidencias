@@ -144,6 +144,8 @@
             <tr class="text-center">
                 <td>Id</td>
                 <td>Prioridad</td>
+                <td>Usuario</td>
+                <td>Técnico</td>
                 <td>Estado</td>
                 <td>Fecha de publicación</td>
                 <td>Fecha de cierre</td>
@@ -171,6 +173,8 @@
             <%}%>
                 <td><%=incidencias.get(i).getIdentificador()%></td>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
+                <td><%=incidencias.get(i).getUsuario()%></td>
+                <td><%=incidencias.get(i).getTecnico()%></td>
                 <td><%=incidencias.get(i).isResuelta()%></td>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <td><%=incidencias.get(i).getFechaFin()%></td>
