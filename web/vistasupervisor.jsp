@@ -180,7 +180,7 @@
         </table>
         
         <center>
-            <form method="POST" action="vistaCliente.jsp">
+            <form method="POST" action="vistasupervisor.jsp">
                 <div class="btn-group" role="group" action="ClientNavbar">
                     <button type="submit" name="pagina" class="btn btn-default btn-xs" value="1"><<</button>
                     <button type="submit" name="pagina" class="btn btn-default btn-xs" value="<%=(pagina-1)%>"><</button>
