@@ -157,7 +157,13 @@
             <%}%>
                 <td><%=incidencias.get(i).getIdentificador()%></td>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
-                <td><%=incidencias.get(i).isResuelta()%></td>
+                <%if(incidencias.get(i).isResuelta()){%>    
+                    <td>Resuelta</td>
+                <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <td><a href="">Resolver</a></td>
+                <%}else{%>
+                    <td>Sin resolver</td>
+                <%}%>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <td><%=incidencias.get(i).getFechaFin()%></td>
                 <td><%=incidencias.get(i).getDescripcion()%></td>

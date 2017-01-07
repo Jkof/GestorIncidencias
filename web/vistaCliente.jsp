@@ -148,9 +148,17 @@
             <%}%>
                 <td><%=incidencias.get(i).getIdentificador()%></td>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
-                <td><%=incidencias.get(i).isResuelta()%></td>
+                <%if(incidencias.get(i).isResuelta()){%>    
+                    <td>Resuelta</td>
+                <%}else{%>    
+                    <td>Sin resolver</td>
+                <%}%>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
-                <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%if(incidencias.get(i).getFechaFin() != null){%>    
+                    <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%}else{%>    
+                    <td><a href="">Solicitar cierre</a></td>
+                <%}%>
                 <td><%=incidencias.get(i).getDescripcion()%></td>
             </tr>
             <%}%>

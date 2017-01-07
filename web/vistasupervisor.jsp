@@ -174,10 +174,22 @@
                 <td><%=incidencias.get(i).getIdentificador()%></td>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
                 <td><%=incidencias.get(i).getUsuario()%></td>
-                <td><%=incidencias.get(i).getTecnico()%></td>
-                <td><%=incidencias.get(i).isResuelta()%></td>
+                <%if(incidencias.get(i).getTecnico() == null){%>    
+                    <td><a href="">Asignar Tecnico</a></td>
+                <%}else{%>    
+                    <td><%=incidencias.get(i).getTecnico()%></td>
+                <%}%>
+                <%if(incidencias.get(i).isResuelta()){%>    
+                    <td>Resuelta</td>
+                <%}else{%>    
+                    <td>Sin resolver</td>
+                <%}%>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
-                <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%if(incidencias.get(i).getFechaFin() != null){%>    
+                    <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%}else{%>    
+                    <td><a href="">Cerrar</a></td>
+                <%}%>
                 <td><%=incidencias.get(i).getDescripcion()%></td>
             </tr>
             <%}%>
