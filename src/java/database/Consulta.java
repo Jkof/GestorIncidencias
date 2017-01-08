@@ -6,6 +6,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,8 @@ public class Consulta {
     private static final String LISTAR_INCIDENCIAS_ABIERTAS = "SELECT * FROM incidencia WHERE fechaCierre is NULL";
     private static final String LISTAR_INCIDENCIAS_POR_USUARIO = "SELECT * FROM incidencia ORDER BY usuario";
     private static final String LISTAR_INCIDENCIAS_POR_TECNICO = "SELECT * FROM incidencia ORDER BY tecnico";
-
+    private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL);";
+    private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
     
      /**
      * Comprueba que el usuario y password esten el la base de datos
@@ -471,5 +473,47 @@ public class Consulta {
         } finally {
             pool.freeConnection(connection);
         }    
+    }
+
+    public static void insertarIncidencia(Incidencia incidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS);
+            ResultSet resultado = ps.executeQuery();
+            int numeroIncidencias;
+            numeroIncidencias = resultado.getInt(1)+1;
+            //Insertamos un contenido
+            ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
+            //Creamos el ID
+            String idIncidencia;
+            int numero = numeroIncidencias;
+            int numeroCifras = 0;
+            int contador = 4;
+            while(numero!=0){             //mientras a n le queden cifras
+                    numero = numero/10;         //le quitamos el último dígito
+                   numeroCifras++;          //sumamos 1 al contador de cifras
+            }
+            idIncidencia = "INC_2016";
+            while(contador>numeroCifras){
+                idIncidencia = idIncidencia+"0";
+            }
+            idIncidencia = idIncidencia+numeroIncidencias;
+            incidencia.setIdentificador(idIncidencia);
+            ps.setString(1, incidencia.getIdentificador());
+            ps.setString(2, incidencia.getDescripcion());
+            ps.setString(3, incidencia.getInventarioAfectado());
+            ps.setString(4, incidencia.getUsuario());
+            ps.setString(5, incidencia.getPrioridad());
+            ps.setString(6, incidencia.getCategoria());
+            //Tratar la fecha
+            ps.setDate(7, (Date) incidencia.getFechaInicio());
+            int res1 = ps.executeUpdate();
+            System.out.println("Insercion post en contenido: " + res1);
+        } catch (SQLException e) {
+        } finally {
+            pool.freeConnection(connection);
+        }
     }
 }

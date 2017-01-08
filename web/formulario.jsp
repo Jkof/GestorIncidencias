@@ -19,6 +19,34 @@
                     });
             );
         </script>
+        <script>
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '< Ant',
+                nextText: 'Sig >',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+            $(function () {
+                $("#datepicker").datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    dateFormat: "dd/mm/yy"
+                });
+                $("#datepicker").datepicker("setDate", new Date());
+            });
+        </script>
         
         <title>Nueva incidencia</title>
     </head>
@@ -35,7 +63,7 @@
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="fecha">¿Cuando ocurrió?</label>
-                    <input class="form-control" id="fecha" name="fecha" placeholder="dd/mm/yyyy" type="text"/>
+                    <input class="form-control" type="text" id="datepicker" name="fecha">
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="prioridad">Prioridad:</label>

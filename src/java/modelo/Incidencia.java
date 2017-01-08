@@ -28,6 +28,7 @@ public class Incidencia {
             String usuario, String prioridad, String categoria) {
         this.descripcion = descripcion;
         this.inventarioAfectado = inventarioAfectado;
+        this.fechaInicio = fechaInicio;
         this.usuario = usuario;
         this.prioridad = prioridad;
         this.categoria = categoria;

@@ -7,12 +7,19 @@ package servlet;
 
 import database.Consulta;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Incidencia;
 import modelo.Usuario;
 
 /**
@@ -50,17 +57,40 @@ public class Formulario extends HttpServlet {
         String prioridad = request.getParameter("prioridad");
         String categoria = request.getParameter("categoria");
         String descripcion = request.getParameter("descripcion");
-        
-        
-        
+        System.out.println(inventario+fecha+prioridad+categoria+descripcion);
         HttpSession sesion= (HttpSession) request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = dateFormat.parse(fecha);
+            
+            System.out.println(dateFormat.format(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dateFormat.applyPattern("yyyy/MM/dd");
+        String fechaFormateada = dateFormat.format(date);
+        System.out.println(fecha);
+        try {
+            date = dateFormat.parse(fechaFormateada);
+            
+            System.out.println(dateFormat.format(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Incidencia incidencia = new Incidencia(descripcion, inventario, usuario.getUsuario(), prioridad, categoria);
+        incidencia.setFechaInicio(date);
+        sesion.setAttribute("incidencia", incidencia);
+        System.out.println(incidencia.getFechaInicio());
+        Consulta.insertarIncidencia(incidencia);
         if(usuario.getRol().equalsIgnoreCase("Cliente")){
             url = "/vistaCliente.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
-        if(usuario.getRol().equalsIgnoreCase("Tecnico")){
+        else if(usuario.getRol().equalsIgnoreCase("Tecnico")){
             url = "/vistaTecnico.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
