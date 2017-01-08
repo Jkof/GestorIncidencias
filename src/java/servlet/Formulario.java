@@ -83,7 +83,6 @@ public class Formulario extends HttpServlet {
         Incidencia incidencia = new Incidencia(descripcion, inventario, usuario.getUsuario(), prioridad, categoria);
         System.out.println(incidencia.toString());
         incidencia.setFechaInicio(date);
-        sesion.setAttribute("incidencia", incidencia);
         System.out.println(incidencia.getFechaInicio());
         Consulta.insertarIncidencia(incidencia);
         if(usuario.getRol().equalsIgnoreCase("Cliente")){

@@ -493,17 +493,17 @@ public class Consulta {
             ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
             //Creamos el ID
             String idIncidencia;
-            if(numeroIncidencias>9){
+            if(numeroIncidencias<10){
+                idIncidencia = "INC_2016_000"+numeroIncidencias;
+            }
+            else if(numeroIncidencias<100){
                 idIncidencia = "INC_2016_00"+numeroIncidencias;
             }
-            else if(numeroIncidencias>99){
+            else if(numeroIncidencias<1000){
                 idIncidencia = "INC_2016_0"+numeroIncidencias;
             }
-            else if(numeroIncidencias>999){
-                idIncidencia = "INC_2016_"+numeroIncidencias;
-            }
             else{
-                idIncidencia = "INC_2016_000"+numeroIncidencias;
+                idIncidencia = "INC_2016_"+numeroIncidencias;
             }
             System.out.println(idIncidencia);
             incidencia.setIdentificador(idIncidencia);

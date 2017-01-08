@@ -72,6 +72,10 @@
         <servlet-name>IncidenciaPorUsuario</servlet-name>
         <servlet-class>servlet.IncidenciaPorUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cancelar</servlet-name>
+        <servlet-class>servlet.Cancelar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>IncidenciaPorUsuario</servlet-name>
         <url-pattern>/IncidenciaPorUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cancelar</servlet-name>
+        <url-pattern>/Cancelar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
