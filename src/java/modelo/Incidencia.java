@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author DAVID
  */
-public class Incidencia {
+public class Incidencia implements Serializable{
     private String identificador;
     private String descripcion;
     private String inventarioAfectado;
@@ -28,7 +29,6 @@ public class Incidencia {
             String usuario, String prioridad, String categoria) {
         this.descripcion = descripcion;
         this.inventarioAfectado = inventarioAfectado;
-        this.fechaInicio = fechaInicio;
         this.usuario = usuario;
         this.prioridad = prioridad;
         this.categoria = categoria;

@@ -40,6 +40,7 @@
             $.datepicker.setDefaults($.datepicker.regional['es']);
             $(function () {
                 $("#datepicker").datepicker({
+                    maxDate: new Date,
                     autoclose: true,
                     todayHighlight: true,
                     dateFormat: "dd/mm/yy"
@@ -68,17 +69,15 @@
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="prioridad">Prioridad:</label>
                     <select class="form-control" name="prioridad">
-                        <option selected>cualquiera</option>
                         <option>Alta</option>
                         <option>Media</option>
-                        <option>Baja</option>
+                        <option selected>Baja</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="categoria">Categoría:</label>
                     <select class="form-control" name="categoria">
-                        <option selected>cualquiera</option>
-                        <option>Hardware</option>
+                        <option selected>Hardware</option>
                         <option>Problemas con las comunicaciones</option>
                         <option>Software basico</option>
                         <option>Software de aplicaciones</option>

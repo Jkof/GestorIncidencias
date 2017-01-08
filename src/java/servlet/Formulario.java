@@ -81,6 +81,7 @@ public class Formulario extends HttpServlet {
             Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
         }
         Incidencia incidencia = new Incidencia(descripcion, inventario, usuario.getUsuario(), prioridad, categoria);
+        System.out.println(incidencia.toString());
         incidencia.setFechaInicio(date);
         sesion.setAttribute("incidencia", incidencia);
         System.out.println(incidencia.getFechaInicio());
@@ -95,7 +96,9 @@ public class Formulario extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        else{
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
     }
 }

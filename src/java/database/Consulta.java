@@ -36,7 +36,7 @@ public class Consulta {
     private static final String LISTAR_INCIDENCIAS_ABIERTAS = "SELECT * FROM incidencia WHERE fechaCierre is NULL";
     private static final String LISTAR_INCIDENCIAS_POR_USUARIO = "SELECT * FROM incidencia ORDER BY usuario";
     private static final String LISTAR_INCIDENCIAS_POR_TECNICO = "SELECT * FROM incidencia ORDER BY tecnico";
-    private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL);";
+    private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL)";
     private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
     
      /**
@@ -478,28 +478,34 @@ public class Consulta {
     public static void insertarIncidencia(Incidencia incidencia) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
             ps = connection.prepareStatement(NUMERO_INCIDENCIAS);
             ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
             int numeroIncidencias;
             numeroIncidencias = resultado.getInt(1)+1;
+            System.out.println(numeroIncidencias);
             //Insertamos un contenido
             ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
             //Creamos el ID
             String idIncidencia;
-            int numero = numeroIncidencias;
-            int numeroCifras = 0;
-            int contador = 4;
-            while(numero!=0){             //mientras a n le queden cifras
-                    numero = numero/10;         //le quitamos el último dígito
-                   numeroCifras++;          //sumamos 1 al contador de cifras
+            if(numeroIncidencias>9){
+                idIncidencia = "INC_2016_00"+numeroIncidencias;
             }
-            idIncidencia = "INC_2016";
-            while(contador>numeroCifras){
-                idIncidencia = idIncidencia+"0";
+            else if(numeroIncidencias>99){
+                idIncidencia = "INC_2016_0"+numeroIncidencias;
             }
-            idIncidencia = idIncidencia+numeroIncidencias;
+            else if(numeroIncidencias>999){
+                idIncidencia = "INC_2016_"+numeroIncidencias;
+            }
+            else{
+                idIncidencia = "INC_2016_000"+numeroIncidencias;
+            }
+            System.out.println(idIncidencia);
             incidencia.setIdentificador(idIncidencia);
             ps.setString(1, incidencia.getIdentificador());
             ps.setString(2, incidencia.getDescripcion());
@@ -508,7 +514,9 @@ public class Consulta {
             ps.setString(5, incidencia.getPrioridad());
             ps.setString(6, incidencia.getCategoria());
             //Tratar la fecha
-            ps.setDate(7, (Date) incidencia.getFechaInicio());
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(incidencia.getFechaInicio().getTime());
+            ps.setDate(7, sqlDate);
             int res1 = ps.executeUpdate();
             System.out.println("Insercion post en contenido: " + res1);
         } catch (SQLException e) {
