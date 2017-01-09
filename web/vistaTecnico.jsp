@@ -171,19 +171,21 @@
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <%if(incidencias.get(i).getFechaFin() != null){%>    
                     <td><%=incidencias.get(i).getFechaFin()%></td>
-                <%}else if(incidencias.get(i).getTecnico()== null&&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())&&incidencias.get(i).getResolucion()!=null){%>    
+                <%}else if(incidencias.get(i).getResolucion()!=null){%>    
                     <td>Pendiente de cierre</td>
-                <%}else if(incidencias.get(i).getTecnico()== null&&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                <%}else if(incidencias.get(i).getTecnico()== null &&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
                     <form method="POST" action="SolicitarCierre">
                     <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
                     </form>
-                <%}else if(incidencias.get(i).getTecnico()== null&&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())&&incidencias.get(i).getResolucion()!=null){%>    
-                    <td>Pendiente de cierre</td>
-                <%}else if(incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())&&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                <%}else if(incidencias.get(i).getTecnico()!= null &&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())&&!incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())){%>    
                     <form method="POST" action="SolicitarCierre">
                     <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
                     </form>
-                <%}else if(incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())&&!incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                <%}else if(incidencias.get(i).getTecnico()!= null &&incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())&&!incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <form method="POST" action="SolicitarCierre">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
+                    </form>
+                <%}else if(incidencias.get(i).getTecnico()!= null &&incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())&&incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
                     <form method="POST" action="SolicitarCierre">
                     <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
                     </form>
