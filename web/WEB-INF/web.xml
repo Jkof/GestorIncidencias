@@ -76,6 +76,14 @@
         <servlet-name>Cancelar</servlet-name>
         <servlet-class>servlet.Cancelar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListaTecnicos</servlet-name>
+        <servlet-class>servlet.ListaTecnicos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsignarTecnico</servlet-name>
+        <servlet-class>servlet.AsignarTecnico</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -151,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>Cancelar</servlet-name>
         <url-pattern>/Cancelar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaTecnicos</servlet-name>
+        <url-pattern>/ListaTecnicos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsignarTecnico</servlet-name>
+        <url-pattern>/AsignarTecnico</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import modelo.Incidencia;
+import modelo.Tecnico;
 import modelo.Usuario;
 
 /**
@@ -23,23 +25,24 @@ public class Consulta {
     private static final String INICIAR_SESION = "SELECT * FROM "
             + "usuario WHERE nombre= ? AND password= ?";
     private static final String INCIDENCIA_CLIENTE = "SELECT * FROM "
-            + "incidencia WHERE usuario=?";
+            + "incidencia WHERE usuario=? ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_PERSONALES_ABIERTAS = "SELECT"
-            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NULL";
+            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NULL ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_PERSONALES_CERRADAS = "SELECT"
-            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NOT NULL";
+            + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NOT NULL ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_ASIGNADAS = "SELECT * "
-            + "FROM incidencia WHERE tecnico = ? AND resuelta = 0 AND fechaCierre is NULL";
+            + "FROM incidencia WHERE tecnico = ? AND resuelta = 0 AND fechaCierre is NULL ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_CERRADAS = "SELECT"
-            + " * FROM incidencia WHERE fechaCierre is NOT NULL";
-    private static final String LISTAR_TODAS_INCIDENCIAS = "SELECT * FROM incidencia";
-    private static final String LISTAR_INCIDENCIAS_ABIERTAS = "SELECT * FROM incidencia WHERE fechaCierre is NULL";
+            + " * FROM incidencia WHERE fechaCierre is NOT NULL ORDER BY idIncidencia DESC";
+    private static final String LISTAR_TODAS_INCIDENCIAS = "SELECT * FROM incidencia ORDER BY idIncidencia DESC";
+    private static final String LISTAR_INCIDENCIAS_ABIERTAS = "SELECT * FROM incidencia WHERE fechaCierre is NULL ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_POR_USUARIO = "SELECT * FROM incidencia ORDER BY usuario";
     private static final String LISTAR_INCIDENCIAS_POR_TECNICO = "SELECT * FROM incidencia ORDER BY tecnico";
     private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL)";
     private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
-    private static final String INFO_INCIDENCIA= "SELECT * FROM incidencia WHERE idIncidencia=?";
-    
+    private static final String INFO_INCIDENCIA = "SELECT * FROM incidencia WHERE idIncidencia=?";
+    private static final String TECNICOS_INCIDENCIAS = "SELECT tecnico, COUNT(*) FROM incidencia GROUP BY tecnico";
+    private static final String ASIGNAR_INCIDENCIA = "UPDATE incidencia SET tecnico=? WHERE idIncidencia=?";
      /**
      * Comprueba que el usuario y password esten el la base de datos
      *
@@ -493,18 +496,20 @@ public class Consulta {
             //Insertamos un contenido
             ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
             //Creamos el ID
-            String idIncidencia;
+            String idIncidencia = "INC_";
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            idIncidencia = idIncidencia + year+"_";
             if(numeroIncidencias<10){
-                idIncidencia = "INC_2016_000"+numeroIncidencias;
+                idIncidencia = idIncidencia+"000"+numeroIncidencias;
             }
             else if(numeroIncidencias<100){
-                idIncidencia = "INC_2016_00"+numeroIncidencias;
+                idIncidencia = idIncidencia+"00"+numeroIncidencias;
             }
             else if(numeroIncidencias<1000){
-                idIncidencia = "INC_2016_0"+numeroIncidencias;
+                idIncidencia = idIncidencia+"0"+numeroIncidencias;
             }
             else{
-                idIncidencia = "INC_2016_"+numeroIncidencias;
+                idIncidencia = idIncidencia+numeroIncidencias;
             }
             System.out.println(idIncidencia);
             incidencia.setIdentificador(idIncidencia);
@@ -556,6 +561,54 @@ public class Consulta {
             }
         } catch (SQLException e) {
             return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static ArrayList<Tecnico> infoTecnico() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Tecnico tecnico;
+        
+        ArrayList<Tecnico> tecnicos = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(TECNICOS_INCIDENCIAS);
+            ResultSet resultado = ps.executeQuery();
+            if(null != resultado){
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                  tecnico = new Tecnico(resultado.getString(1), 
+                          resultado.getInt(2));  
+                  tecnicos.add(tecnico);
+                }
+                System.out.println(tecnicos.size());
+                
+                return tecnicos;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static void actualizarTecnico(Incidencia incidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(ASIGNAR_INCIDENCIA);
+            //Creamos la incidencia
+            ps.setString(1, incidencia.getTecnico());
+            ps.setString(2, incidencia.getIdentificador());
+            int res1 = ps.executeUpdate();
+            System.out.println("Insercion post en contenido: " + res1);
+        } catch (SQLException e) {
         } finally {
             pool.freeConnection(connection);
         }

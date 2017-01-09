@@ -176,8 +176,10 @@
                 </form>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
                 <td><%=incidencias.get(i).getUsuario()%></td>
-                <%if(incidencias.get(i).getTecnico() == null){%>    
-                    <td><a href="">Asignar Tecnico</a></td>
+                <%if(incidencias.get(i).getTecnico() == null){%>
+                <form method="POST" action="ListaTecnicos">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Asignar Tecnico</button></td>
+                </form>
                 <%}else{%>    
                     <td><%=incidencias.get(i).getTecnico()%></td>
                 <%}%>
