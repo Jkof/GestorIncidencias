@@ -8,6 +8,7 @@ package servlet;
 import database.Consulta;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,9 @@ public class Cerrar extends HttpServlet {
         session.setAttribute("incidencia", incidencia);
         Consulta.cerrarIncidencia(incidencia);
         url = "/vistasupervisor.jsp";
+        ArrayList <Incidencia> incidencias;
+        incidencias = Consulta.incidenciaSupervisor();
+        session.setAttribute("incidencias", incidencias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

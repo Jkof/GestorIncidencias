@@ -56,6 +56,9 @@ public class AsignarTecnico extends HttpServlet {
             Incidencia incidencia = (Incidencia)session.getAttribute("incidencia");
             incidencia.setTecnico(nombreTecnico);
             Consulta.actualizarTecnico(incidencia);
+            ArrayList <Incidencia> incidencias;
+            incidencias = Consulta.incidenciaSupervisor();
+            session.setAttribute("incidencias", incidencias);
             System.out.println("TecnicoAsignado");
             url = "/vistasupervisor.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

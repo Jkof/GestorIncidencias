@@ -183,6 +183,10 @@
                     <form method="POST" action="SolicitarCierre">
                     <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
                     </form>
+                <%}else if(incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())&&!incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <form method="POST" action="SolicitarCierre">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Solicitar cierre</button></td>
+                    </form>
                 <%}else{%>
                     <td>Cerrada</td>
                 <%}%>

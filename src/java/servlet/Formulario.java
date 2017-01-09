@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,11 +88,17 @@ public class Formulario extends HttpServlet {
         Consulta.insertarIncidencia(incidencia);
         if(usuario.getRol().equalsIgnoreCase("Cliente")){
             url = "/vistaCliente.jsp";
+            ArrayList <Incidencia> incidencias;
+            incidencias = Consulta.incidenciaUsuario(usuario.getUsuario());
+            sesion.setAttribute("incidencias", incidencias);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
         else if(usuario.getRol().equalsIgnoreCase("Tecnico")){
             url = "/vistaTecnico.jsp";
+            ArrayList <Incidencia> incidencias;
+            incidencias = Consulta.incidenciaTecnico(usuario.getUsuario());
+            sesion.setAttribute("incidencias", incidencias);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
