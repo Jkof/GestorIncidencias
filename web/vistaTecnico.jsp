@@ -155,11 +155,15 @@
             <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Baja")){%>    
             <tr class="text-center success">
             <%}%>
-                <td><%=incidencias.get(i).getIdentificador()%></td>
+                <form method="POST" action="Detalle">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>"><%=incidencias.get(i).getIdentificador()%></button></td>
+                </form>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
                 <%if(incidencias.get(i).isResuelta()){%>    
                     <td>Resuelta</td>
-                    <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario()) && incidencias.get(i).getFechaFin()==null){%>    
+                <%}else if(incidencias.get(i).getTecnico()==null||incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <td>Sin resolver</td>
+                <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario()) && incidencias.get(i).getFechaFin()==null){%>    
                     <td><a href="">Resolver</a></td>
                 <%}else{%>
                     <td>Sin resolver</td>
@@ -167,6 +171,8 @@
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <%if(incidencias.get(i).getFechaFin() != null){%>    
                     <td><%=incidencias.get(i).getFechaFin()%></td>
+                <%}else if(incidencias.get(i).getTecnico()== null||incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
+                    <td><a href="">Solicitar cierre</a></td>
                 <%}else if(incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario())||incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
                     <td><a href="">Solicitar cierre</a></td>
                 <%}else{%>

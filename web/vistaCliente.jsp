@@ -146,7 +146,9 @@
             <%if(incidencias.get(i).getPrioridad().equalsIgnoreCase("Baja")){%>    
             <tr class="text-center success">
             <%}%>
-                <td><%=incidencias.get(i).getIdentificador()%></td>
+            <form method="POST" action="Detalle">
+                <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>"><%=incidencias.get(i).getIdentificador()%></button></td>
+            </form>    
                 <td><%=incidencias.get(i).getPrioridad()%></td>
                 <%if(incidencias.get(i).isResuelta()){%>    
                     <td>Resuelta</td>

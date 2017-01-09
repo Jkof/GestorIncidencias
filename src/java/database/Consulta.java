@@ -38,6 +38,7 @@ public class Consulta {
     private static final String LISTAR_INCIDENCIAS_POR_TECNICO = "SELECT * FROM incidencia ORDER BY tecnico";
     private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL)";
     private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
+    private static final String INFO_INCIDENCIA= "SELECT * FROM incidencia WHERE idIncidencia=?";
     
      /**
      * Comprueba que el usuario y password esten el la base de datos
@@ -520,6 +521,41 @@ public class Consulta {
             int res1 = ps.executeUpdate();
             System.out.println("Insercion post en contenido: " + res1);
         } catch (SQLException e) {
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static Incidencia infoIncidencia(String idIncidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        Usuario sesion = null;
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(INFO_INCIDENCIA);
+            ps.setString(1, idIncidencia);
+            ResultSet resultado = ps.executeQuery();
+            Incidencia incidencia;
+            if(resultado.first()){
+                incidencia = new Incidencia(resultado.getString(2), 
+                          resultado.getString(3), resultado.getString(4), 
+                          resultado.getString(5), resultado.getString(6));  
+                    
+                  incidencia.setIdentificador(resultado.getString(1));
+                  incidencia.setFechaInicio(resultado.getDate(7));
+                  incidencia.setFechaFin(resultado.getDate(8));
+                  incidencia.setTecnico(resultado.getString(9));
+                  incidencia.setResuelta(resultado.getBoolean(10));
+                  incidencia.setResolucion(resultado.getString(11));
+                  
+                  System.out.println(incidencia.getIdentificador());
+                  return incidencia;
+            }
+            else{
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
         } finally {
             pool.freeConnection(connection);
         }

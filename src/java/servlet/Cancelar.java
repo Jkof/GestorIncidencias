@@ -55,6 +55,11 @@ public class Cancelar extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
                 dispatcher.forward(request, response);
             }
+            if(user.getRol().equalsIgnoreCase("Supervisor")){
+                url = "/vistasupervisor.jsp";
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+                dispatcher.forward(request, response);
+            }
             else{
                 url = "/vistaTecnico.jsp";
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
