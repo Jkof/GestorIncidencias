@@ -30,7 +30,6 @@
                     <form method="POST" action="AsignarTecnico">
                     <td><button type="submit" class="btn btn-link" name="nombreTecnico" value="<%=tecnicos.get(i).getNombre()%>"><%=tecnicos.get(i).getNombre()%></button></td>
                     </form>
-                    <td><%=tecnicos.get(i).getNombre()%></td>
                     <td><%=tecnicos.get(i).getNumeroIncidencias()%></td>
                 </tr>
                 <%}%>

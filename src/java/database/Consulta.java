@@ -41,7 +41,7 @@ public class Consulta {
     private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL)";
     private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
     private static final String INFO_INCIDENCIA = "SELECT * FROM incidencia WHERE idIncidencia=?";
-    private static final String TECNICOS_INCIDENCIAS = "SELECT tecnico, COUNT(*) FROM incidencia GROUP BY tecnico";
+    private static final String TECNICOS_INCIDENCIAS = "SELECT tecnico, COUNT(*) FROM incidencia WHERE tecnico is NOT NULL GROUP BY tecnico";
     private static final String ASIGNAR_INCIDENCIA = "UPDATE incidencia SET tecnico=? WHERE idIncidencia=?";
      /**
      * Comprueba que el usuario y password esten el la base de datos
