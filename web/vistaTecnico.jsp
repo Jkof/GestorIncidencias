@@ -70,43 +70,7 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <center>
-                        <div class="col-sm-3">
-                            <br>Palabras Clave<br><br>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-sm-3">
-                            <br>Estado<br><br>
-                            <select class="form-control" style="width: 130px;">
-                                <option selected>cualquiera</option>
-                                <option>Por Cerrar</option>
-                                <option>Por Resolver</option>
-                                <option>Resuelta</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <br>Prioridad<br><br>
-                            <select class="form-control" style="width: 130px;">
-                                <option selected>cualquiera</option>
-                                <option>Alta</option>
-                                <option>Media</option>
-                                <option>Baja</option>
-                            </select>
-                        </div>
-                            <div class="col-sm-1"><br><br><br><button type="button" class="btn btn-default btn-sm">Buscar</button></div>
-                            <div class="col-sm-1"><br><br><br><button type="button" class="btn btn-default btn-sm">Limpiar</button></div>
-                        </center>
-                    </div>
-                    <br>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2"></div>
-        
-        <br><br><br><br><br><br><br><br><br>
-        
-        <%
+                    <%
             ArrayList<Incidencia> incidencias = (ArrayList) session.getAttribute("incidencias");
             
             int maxPaginas = (int)Math.ceil(incidencias.size()/10.0);
@@ -213,8 +177,8 @@
                 </div>
             </form>
         </center>
-        
-        <br>
-            
+                </div>
+            </div>
+        </div>
     </body>
 </html>

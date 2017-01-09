@@ -88,9 +88,20 @@
             </div>
         </div>
         
-        <!--Jumbotron con resumen general-->
+        
+        
+        <!--Pestañas con descripciones-->
         <div class="container">
             <div class="container well col-md-10 col-md-offset-1">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#tab1" data-toggle="tab">Resumen del análisis</a></li>
+                      <li><a href="#tab2" data-toggle="tab">Resumen por técnico</a></li>
+                      <li><a href="#tab3" data-toggle="tab">Resumen por tipo de incidencia</a></li>
+                      <li><a href="#tab4" data-toggle="tab">Resumen por prioridad de incidencia</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
                 <h3>Resumen del análisis</h3>
                 <div class="col-md-12"><hr></div>
                 <div class="col-md-3">
@@ -118,26 +129,18 @@
                     </tr>
                 </table>
                 <br/><br/>
-            </div>
-        </div>
-        
-        <!--Pestañas con descripciones-->
-        <div class="container">
-            <div class="container well col-md-10 col-md-offset-1">
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#">Resumen diario</a>
-                    
-                    </li>
-                    <li role="presentation"><a href="#">Resumen por técnico</a>
-                    
-                    </li>
-                    <li role="presentation"><a href="#">Resumen por tipo de incidencia</a>
-                    
-                    </li>
-                    <li role="presentation"><a href="#">Resumen por prioridad de incidencia</a>
-                    
-                    </li>
-                </ul>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p>Howdy, I'm in Section 2.</p>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <p>I'm in Section 3.</p>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            <p>Howdy, I'm in Section 4.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
