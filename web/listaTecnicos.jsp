@@ -14,13 +14,16 @@
 
         <title>Supervisor</title>
     </head>
-    <body class="body-login center-block">
+     <body class="body-login center-block">
+        <div class="page-header col-md-6 col-md-offset-3">
+            <h2>Lista técnicos para asignar:</h2>
+        </div>
         <div class="container well col-md-6 col-md-offset-3">
+         <div class="panel">
             <%
                 ArrayList<Tecnico> tecnicos = (ArrayList) session.getAttribute("tecnicos");
             %>
-            <label class="control-label" for="asignar">Técnicos:</label>
-            <table class="table table-bordered">
+            <table class="table table-bordered col-md-0">
                 <tr class="text-center">
                     <td>Nombre</td>
                     <td>Número de incidencia</td>
@@ -34,6 +37,7 @@
                 </tr>
                 <%}%>
             </table>
+         </div>
         </div>
     </body>
 </html>

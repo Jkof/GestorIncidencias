@@ -24,7 +24,8 @@ public class Consulta {
     
     private static final String INICIAR_SESION = "SELECT * FROM "
             + "usuario WHERE nombre= ? AND password= ?";
-    private static final String INCIDENCIA_CLIENTE = "SELECT * FROM "
+    private static final String INCIDENCIA_CLIENTE = "SELECT * FROM incidencia WHERE usuario=? ORDER BY idIncidencia DESC";
+    private static final String INCIDENCIA_TECNICO = "SELECT * FROM "
             + "incidencia WHERE tecnico=? OR usuario=? ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_PERSONALES_ABIERTAS = "SELECT"
             + " * FROM incidencia WHERE usuario = ? AND fechaCierre is NULL ORDER BY idIncidencia DESC";
@@ -208,7 +209,7 @@ public class Consulta {
         
         ArrayList<Incidencia> incidenciasAbiertas = new ArrayList<>();
         try {
-            ps = connection.prepareStatement(INCIDENCIA_CLIENTE);
+            ps = connection.prepareStatement(INCIDENCIA_TECNICO);
             ps.setString(1, usuario);
             ps.setString(2,usuario);
             ResultSet resultado = ps.executeQuery();
