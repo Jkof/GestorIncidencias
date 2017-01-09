@@ -7,12 +7,6 @@ package servlet;
 
 import database.Consulta;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Incidencia;
-import modelo.Usuario;
 
 /**
  *
- * @author DAVID
+ * @author Diego
  */
-public class GenerarInforme extends HttpServlet {
+public class SolicitarCierre extends HttpServlet {
 
-      @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
@@ -50,10 +43,15 @@ public class GenerarInforme extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String url = "/informe.jsp";
+        String url;
+        String idIncidencia = request.getParameter("idIncidencia");
+        HttpSession session;
+        session = request.getSession();
+        System.out.println(idIncidencia);
+        Incidencia incidencia = Consulta.infoIncidencia(idIncidencia);
+        session.setAttribute("incidencia", incidencia);
+        url = "/solicitarCierre.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
-
 }

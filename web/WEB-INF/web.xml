@@ -84,6 +84,18 @@
         <servlet-name>AsignarTecnico</servlet-name>
         <servlet-class>servlet.AsignarTecnico</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SolicitarCierre</servlet-name>
+        <servlet-class>servlet.SolicitarCierre</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudCierre</servlet-name>
+        <servlet-class>servlet.SolicitudCierre</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cerrar</servlet-name>
+        <servlet-class>servlet.Cerrar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -167,6 +179,18 @@
     <servlet-mapping>
         <servlet-name>AsignarTecnico</servlet-name>
         <url-pattern>/AsignarTecnico</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitarCierre</servlet-name>
+        <url-pattern>/SolicitarCierre</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudCierre</servlet-name>
+        <url-pattern>/SolicitudCierre</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cerrar</servlet-name>
+        <url-pattern>/Cerrar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,7 +7,7 @@ package servlet;
 
 import database.Consulta;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +26,7 @@ import modelo.Usuario;
  *
  * @author DAVID
  */
-public class GenerarInforme extends HttpServlet {
+public class SolicitudCierre extends HttpServlet {
 
       @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,9 +51,29 @@ public class GenerarInforme extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String url = "/informe.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        String url = "/solicitarCierre.jsp";
+        String solicitudCierre = request.getParameter("notificacionCierre");
+        System.out.println(solicitudCierre);
+        HttpSession sesion= (HttpSession) request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        
+        Incidencia incidencia = (Incidencia) sesion.getAttribute("incidencia");
+        incidencia.setResolucion(solicitudCierre);
+        //Actualizar solicitud en base de datos
+        Consulta.solicitarCierre(incidencia);
+        if(usuario.getRol().equalsIgnoreCase("Cliente")){
+            url = "/vistaCliente.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
+        else if(usuario.getRol().equalsIgnoreCase("Tecnico")){
+            url = "/vistaTecnico.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
+        else{
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        }
     }
-
 }

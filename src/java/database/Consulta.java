@@ -43,7 +43,10 @@ public class Consulta {
     private static final String INFO_INCIDENCIA = "SELECT * FROM incidencia WHERE idIncidencia=?";
     private static final String TECNICOS_INCIDENCIAS = "SELECT tecnico, COUNT(*) FROM incidencia WHERE tecnico is NOT NULL GROUP BY tecnico";
     private static final String ASIGNAR_INCIDENCIA = "UPDATE incidencia SET tecnico=? WHERE idIncidencia=?";
-     /**
+    private static final String SOLICITAR_CIERRE = "UPDATE incidencia SET resolucion=? WHERE idIncidencia=?";
+    private static final String CERRAR_INCIDENCIA = "UPDATE incidencia SET fechaCierre=? WHERE idIncidencia=?";
+    
+    /**
      * Comprueba que el usuario y password esten el la base de datos
      *
      * @param usuario el email del usuario
@@ -520,7 +523,6 @@ public class Consulta {
             ps.setString(5, incidencia.getPrioridad());
             ps.setString(6, incidencia.getCategoria());
             //Tratar la fecha
-            java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(incidencia.getFechaInicio().getTime());
             ps.setDate(7, sqlDate);
             int res1 = ps.executeUpdate();
@@ -605,6 +607,43 @@ public class Consulta {
             ps = connection.prepareStatement(ASIGNAR_INCIDENCIA);
             //Creamos la incidencia
             ps.setString(1, incidencia.getTecnico());
+            ps.setString(2, incidencia.getIdentificador());
+            int res1 = ps.executeUpdate();
+            System.out.println("Insercion post en contenido: " + res1);
+        } catch (SQLException e) {
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static void solicitarCierre(Incidencia incidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(SOLICITAR_CIERRE);
+            //Creamos la incidencia
+            ps.setString(1, incidencia.getResolucion());
+            ps.setString(2, incidencia.getIdentificador());
+            int res1 = ps.executeUpdate();
+            System.out.println("Insercion post en contenido: " + res1);
+        } catch (SQLException e) {
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static void cerrarIncidencia(Incidencia incidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(CERRAR_INCIDENCIA);
+            //Creamos la fecha
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            
+            ps.setDate(1, sqlDate);
             ps.setString(2, incidencia.getIdentificador());
             int res1 = ps.executeUpdate();
             System.out.println("Insercion post en contenido: " + res1);

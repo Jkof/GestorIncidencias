@@ -191,8 +191,14 @@
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <%if(incidencias.get(i).getFechaFin() != null){%>    
                     <td><%=incidencias.get(i).getFechaFin()%></td>
+                    <%}else if(incidencias.get(i).getFechaFin() == null && incidencias.get(i).getResolucion()!=null){%>    
+                    <form method="POST" action="Cerrar">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Pendiente de cierre</button></td>
+                    </form>
                 <%}else{%>    
-                    <td><a href="">Cerrar</a></td>
+                    <form method="POST" action="Cerrar">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Cerrar</button></td>
+                </form>
                 <%}%>
                 <td><%=incidencias.get(i).getDescripcion()%></td>
             </tr>
