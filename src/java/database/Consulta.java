@@ -935,7 +935,7 @@ public class Consulta {
                 ResultSet result = ps.executeQuery();
                 System.out.println("Hay datos");
                 int i = 0;
-                while(resultado.next() && i<tecnicos.size()){
+                while(result.next() && i<tecnicos.size()){
                     tecnicos.get(i).setNumeroNoResueltas(result.getInt(2));
                     i++;
                 }
