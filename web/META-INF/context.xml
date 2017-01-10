@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/GestorIncidencias">
     <Resource name="jdbc/gestorincidencias" auth="Container" type="javax.sql.DataSource" maxActive="100" maxIdle="30"
-              maxWait="10000" username="root" password="silvia14922010" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/gestorincidencias"/>
+              maxWait="10000" username="PGPI_grupo02" password="JmfB5beJ" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://jair.lab.inf.uva.es:3306/PGPI_grupo02"/>
 </Context>
