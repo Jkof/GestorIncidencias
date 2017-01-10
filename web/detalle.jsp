@@ -39,11 +39,11 @@
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="inventario">Inventario afectado:</label>
-                    <p class="form-control-static">PC_Lab1_001</p>
+                    <p class="form-control-static"><%=incidencia.getInventarioAfectado()%></p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="fecha">¿Cuando ocurrió?</label>
-                    <p class="form-control-static">29/12/2016</p>
+                    <p class="form-control-static"><%=incidencia.getFechaInicio()%></p>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="prioridad">Prioridad:</label>
@@ -55,17 +55,29 @@
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="descripcion">Descripción:</label>
-                    <p class="form-control-static">Parrafo donde va la descripción 
-                        escrita por el usuario que la crea</p>
+                    <%if(incidencia.getDescripcion()!=null){%>
+                    <p class="form-control-static"><%=incidencia.getDescripcion()%></p>
+                    <%}else{%>
+                    <p class="form-control-static">Esta incidencia no contiene descripción</p>
+                    <%}%>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
-                    <label class="control-label" for="cerrada">¿Cerrada?</label>
-                    <p class="form-control-static">Si/No</p>
+                    <label class="control-label" for="cerrada">Estado</label>
+                    <%if(incidencia.getFechaFin()!=null){%>
+                    <p class="form-control-static">La incidencia se ha cerrado el día <%=incidencia.getFechaFin()%></p>
+                    <%}else{%>
+                    <p class="form-control-static">Esta incidencia no se ha cerrado o está pendiente de resolver</p>
+                    <%}%>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <label class="control-label" for="resolucion">Resolución:</label>
-                    <p class="form-control-static">Parrafo donde va la descripción 
-                        de la resolución</p>
+                    <%if(incidencia.getResolucion()!=null && incidencia.isResuelta()){%>
+                    <p class="form-control-static"><%=incidencia.getResolucion()%></p>
+                    <%}else if(incidencia.getResolucion()!=null && !incidencia.isResuelta()){%>
+                    <p class="form-control-static">La incidencia no se pudo resolver</p>
+                    <%}else{%>
+                    <p class="form-control-static">La incidencia no se ha resuelto todavía</p>
+                    <%}%>
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <br><br>

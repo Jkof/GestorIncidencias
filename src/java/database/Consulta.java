@@ -6,7 +6,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +45,18 @@ public class Consulta {
     private static final String ASIGNAR_INCIDENCIA = "UPDATE incidencia SET tecnico=? WHERE idIncidencia=?";
     private static final String SOLICITAR_CIERRE = "UPDATE incidencia SET resolucion=? WHERE idIncidencia=?";
     private static final String CERRAR_INCIDENCIA = "UPDATE incidencia SET fechaCierre=? WHERE idIncidencia=?";
+    private static final String NUMERO_INCIDENCIAS_RESUELTAS = "SELECT COUNT(*) FROM incidencia WHERE resuelta=1";
+    private static final String NUMERO_INCIDENCIAS_NO_RESUELTAS = "SELECT COUNT(*) FROM incidencia WHERE resuelta=0";
+    private static final String NUMERO_INCIDENCIAS_NO_ASIGNADAS = "SELECT COUNT(*) FROM incidencia WHERE tecnico is NULL";
+    private static final String NUMERO_INCIDENCIAS_HARDWARE = "SELECT COUNT(*) FROM incidencia WHERE categoria='hardware'";
+    private static final String NUMERO_INCIDENCIAS_BASICO = "SELECT COUNT(*) FROM incidencia WHERE categoria='software básico'";
+    private static final String NUMERO_INCIDENCIAS_APLICACIONES = "SELECT COUNT(*) FROM incidencia WHERE categoria='software de aplicaciones'";
+    private static final String NUMERO_INCIDENCIAS_COMUNICACIONES = "SELECT COUNT(*) FROM incidencia WHERE categoria='problemas con las comunicaciones'";
+    private static final String NUMERO_INCIDENCIAS_ALTA = "SELECT COUNT(*) FROM incidencia WHERE prioridad='Alta'";
+    private static final String NUMERO_INCIDENCIAS_MEDIA = "SELECT COUNT(*) FROM incidencia WHERE prioridad='Media'";
+    private static final String NUMERO_INCIDENCIAS_BAJA = "SELECT COUNT(*) FROM incidencia WHERE prioridad='Baja'";
+    private static final String SOLICITAR_RESOLUCION = "UPDATE incidencia SET resolucion=?,resuelta=1 WHERE idIncidencia=?";
+    
     
     /**
      * Comprueba que el usuario y password esten el la base de datos
@@ -654,4 +665,251 @@ public class Consulta {
             pool.freeConnection(connection);
         }
     }
+    
+    public static int numeroIncidencias() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1);
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasResueltas() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_RESUELTAS);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1);
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }    
+    }
+
+    public static int numeroIncidenciasNoResueltas() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_NO_RESUELTAS);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasNoAsignadas() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_NO_ASIGNADAS);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasHardware() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_HARDWARE);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasSoftwareBasico() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_BASICO);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasSoftwareAplicacion() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_APLICACIONES);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasComunicaciones() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_COMUNICACIONES);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasAlta() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_ALTA);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasMedia() {
+    ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_MEDIA);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static int numeroIncidenciasBaja() {
+    ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        int numeroIncidencias;
+        try {
+            ps = connection.prepareStatement(NUMERO_INCIDENCIAS_BAJA);
+            ResultSet resultado = ps.executeQuery();
+            if(!resultado.first()){
+                System.out.println("No hay nada");
+            }
+            System.out.println(resultado.toString());
+            numeroIncidencias = resultado.getInt(1)+1;
+            return numeroIncidencias;
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
+
+    public static void solicitarResolucion(Incidencia incidencia) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(SOLICITAR_RESOLUCION);
+            //Creamos la incidencia
+            ps.setString(1, incidencia.getResolucion());
+            ps.setString(2, incidencia.getIdentificador());
+            int res1 = ps.executeUpdate();
+            System.out.println("Insercion post en contenido: " + res1);
+        } catch (SQLException e) {
+        } finally {
+            pool.freeConnection(connection);
+        }    }
 }

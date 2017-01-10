@@ -39,7 +39,7 @@
             <button type="button" class="btn btn-default btn-lg" onclick="location.href='GenerarInforme';">
                 <br>
                 <span class="glyphicon glyphicon-home"></span>
-                <p>Generar Informes<br></p>
+                <p>Generar Informe<br></p>
             </button>
             <button type="button" class="btn btn-default btn-lg" onclick="location.href='IncidenciasAbiertas';">
                 <br>

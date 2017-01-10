@@ -123,14 +123,18 @@
                     <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>"><%=incidencias.get(i).getIdentificador()%></button></td>
                 </form>
                 <td><%=incidencias.get(i).getPrioridad()%></td>
-                <%if(incidencias.get(i).isResuelta()){%>    
+                <%if(incidencias.get(i).isResuelta() && incidencias.get(i).getFechaFin()!=null){%>    
                     <td>Resuelta</td>
                 <%}else if(incidencias.get(i).getTecnico()==null||incidencias.get(i).getUsuario().equalsIgnoreCase(userHost.getUsuario())){%>    
                     <td>Sin resolver</td>
                 <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getTecnico().equalsIgnoreCase(userHost.getUsuario()) && incidencias.get(i).getFechaFin()==null){%>    
-                    <td><a href="">Resolver</a></td>
-                <%}else{%>
+                    <form method="POST" action="Resolver">
+                    <td><button type="submit" class="btn btn-link" name="idIncidencia" value="<%=incidencias.get(i).getIdentificador()%>">Resolver</button></td>
+                    </form>
+                <%}else if(!incidencias.get(i).isResuelta() && incidencias.get(i).getFechaFin()!=null){%>    
                     <td>Sin resolver</td>
+                <%}else{%>
+                    <td>Pendiente de confirmación</td>
                 <%}%>
                 <td><%=incidencias.get(i).getFechaInicio()%></td>
                 <%if(incidencias.get(i).getFechaFin() != null){%>    

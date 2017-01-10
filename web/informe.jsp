@@ -4,6 +4,8 @@
     Author     : DAVID
 --%>
 
+<%@page import="modelo.Tecnico"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,99 +22,23 @@
                     });
             );
         </script>
-        <script>
-            $.datepicker.regional['es'] = {
-                closeText: 'Cerrar',
-                prevText: '< Ant',
-                nextText: 'Sig >',
-                currentText: 'Hoy',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-            $(function () {
-                $("#datepicker").datepicker({
-                    maxDate: new Date,
-                    autoclose: true,
-                    todayHighlight: true,
-                    dateFormat: "dd/mm/yy"
-                });
-                $("#datepicker").datepicker("setDate", new Date());
-                $("#datepicker2").datepicker({
-                    maxDate: new Date,
-                    autoclose: true,
-                    todayHighlight: true,
-                    dateFormat: "dd/mm/yy"
-                });
-                $("#datepicker2").datepicker("setDate", new Date());
-            });
-        </script>
+        
         
         <title>Informes</title>
     </head>
     <body class="body-login center-block">
+        <%
+            int[] valores = (int[]) session.getAttribute("informe");
+            ArrayList<Tecnico> tecnicos = (ArrayList<Tecnico>) session.getAttribute("tecnicos");
+        %>
         <!--Cabecera-->
         <div class="page-header col-md-8 col-md-offset-2">
             <h2>Informe resumen</h2>
         </div>
-        <!--Jumbotron con fechas-->
-        <div class="container">
+         <div class="container">
             <div class="container well col-md-10 col-md-offset-1">
-                <h3>Periodo de análisis</h3>
+            <h3>Resumen del análisis</h3>
                 <div class="col-md-12"><hr></div>
-                <form role="form" action="search" method="GET">
-                    <div class="form-group col-md-1">
-                        <h4>Desde:</h4>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input class="form-control" type="text" id="datepicker" name="fechaInicio">
-                    </div>
-                    <div class="form-group col-md-1">
-                        <h4>Hasta:</h4>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input class="form-control" type="text" id="datepicker2" name="fechaFin">
-                    </div>
-                    <button type="submit" class="btn btn-info btn-default col-md-3 col-md-offset-1 ">Generar informe</button>
-                </form>
-                <br/><br/>
-            </div>
-        </div>
-        
-        
-        
-        <!--Pestañas con descripciones-->
-        <div class="container">
-            <div class="container well col-md-10 col-md-offset-1">
-                <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a href="#tab1" data-toggle="tab">Resumen del análisis</a></li>
-                      <li><a href="#tab2" data-toggle="tab">Resumen por técnico</a></li>
-                      <li><a href="#tab3" data-toggle="tab">Resumen por tipo de incidencia</a></li>
-                      <li><a href="#tab4" data-toggle="tab">Resumen por prioridad de incidencia</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab1">
-                <h3>Resumen del análisis</h3>
-                <div class="col-md-12"><hr></div>
-                <div class="col-md-3">
-                        <h4>Periodo de análisis</h4>
-                </div>
-                <div class="col-md-3">
-                        <h4>18/12/2016</h4>
-                </div>
-                <div class="col-md-3">
-                        <h4>20/12/2016</h4>
-                </div>
                 <div class="col-md-12"><hr></div>
                 <table class="table table-bordered">
                     <tr class="text-center">
@@ -122,22 +48,83 @@
                         <td>Incidencias no asignadas</td>
                     </tr>
                     <tr class="text-center">
-                        <td>Resuelta</td>
-                        <td>Resuelta</td>
-                        <td>Resuelta</td>
-                        <td>Resuelta</td>
+                        <td><%=valores[0]%></td>
+                        <td><%=valores[1]%></td>
+                        <td><%=valores[2]%></td>
+                        <td><%=valores[3]%></td>
                     </tr>
+                </table>
+                <br/><br/>
+            </div>
+         </div>
+        <!--Pestañas con descripciones-->
+        <div class="container">
+            <div class="container well col-md-10 col-md-offset-1">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#tab1" data-toggle="tab">Resumen por técnicos</a></li>
+                      <li><a href="#tab2" data-toggle="tab">Resumen por tipo de incidencia</a></li>
+                      <li><a href="#tab3" data-toggle="tab">Resumen por prioridad de incidencia</a></li>
+                    </ul>
+                    <div class="tab-content">
+                
+                        <div class="tab-pane active" id="tab1">
+                            <h3>Resumen por técnico</h3>
+                <div class="col-md-12"><hr></div>
+                <div class="col-md-12"><hr></div>
+                <table class="table table-bordered">
+                    <tr class="text-center">
+                        <td>Nombre</td>
+                        <td>Incidencias resueltas</td>
+                        <td>Incidencias no resueltas</td>
+                    </tr>
+                    <%for(int i = 0; i<tecnicos.size();i++){%>
+                    <tr class="text-center">
+                        <td><%=tecnicos.get(i).getNombre()%></td>
+                        <td><%=tecnicos.get(i).getNumeroIncidencias()%></td>
+                        <td>0</td>
+                    </tr>
+                    <%}%>
                 </table>
                 <br/><br/>
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <p>Howdy, I'm in Section 2.</p>
+                            <h3>Resumen por tipo de incidencia</h3>
+                <div class="col-md-12"><hr></div>
+                <div class="col-md-12"><hr></div>
+                <table class="table table-bordered">
+                    <tr class="text-center">
+                        <td>Incidencias Hardware</td>
+                        <td>Incidencias Software básico</td>
+                        <td>Incidencias Programas de aplicaciones</td>
+                        <td>Problemas con las comunicaciones</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td><%=valores[4]%></td>
+                        <td><%=valores[5]%></td>
+                        <td><%=valores[6]%></td>
+                        <td><%=valores[7]%></td>
+                    </tr>
+                </table>
+                <br/><br/>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <p>I'm in Section 3.</p>
-                        </div>
-                        <div class="tab-pane" id="tab4">
-                            <p>Howdy, I'm in Section 4.</p>
+                            <h3>Resumen por prioridad de incidencia</h3>
+                <div class="col-md-12"><hr></div>
+                <div class="col-md-12"><hr></div>
+                <table class="table table-bordered">
+                    <tr class="text-center">
+                        <td>Incidencias con prioridad alta</td>
+                        <td>Incidencias con prioridad media</td>
+                        <td>Incidencias con prioridad baja</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td><%=valores[8]%></td>
+                        <td><%=valores[9]%></td>
+                        <td><%=valores[10]%></td>
+                    </tr>
+                </table>
+                <br/><br/>
                         </div>
                     </div>
                 </div>

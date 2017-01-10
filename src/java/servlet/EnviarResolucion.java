@@ -5,7 +5,6 @@
  */
 package servlet;
 
-
 import database.Consulta;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Incidencia;
-import modelo.Tecnico;
+import modelo.Usuario;
 
 /**
  *
  * @author DAVID
  */
-public class GenerarInforme extends HttpServlet {
+public class EnviarResolucion extends HttpServlet {
 
       @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,29 +45,20 @@ public class GenerarInforme extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int[] valores = new int[11];
-        //Incidencias totales, resueltas, no resueltas, no asignadas
-        valores[0] = Consulta.numeroIncidencias();
-        valores[1] = Consulta.numeroIncidenciasResueltas();
-        valores[2] = Consulta.numeroIncidenciasNoResueltas();
-        valores[3] = Consulta.numeroIncidenciasNoAsignadas();
-        //Incidencias por tecnico(numero de incidencias por tecnico)
-        HttpSession session;
-        session = request.getSession();
-        ArrayList<Tecnico> tecnicos = Consulta.infoTecnico();
-        session.setAttribute("tecnicos", tecnicos);
-        //Incidencias por tipo de incidencia
-        valores[4] = Consulta.numeroIncidenciasHardware();
-        valores[5] = Consulta.numeroIncidenciasSoftwareBasico();
-        valores[6] = Consulta.numeroIncidenciasSoftwareAplicacion();
-        valores[7] = Consulta.numeroIncidenciasComunicaciones();
-        //Incidencias por prioridad
-        valores[8] = Consulta.numeroIncidenciasAlta();
-        valores[9] = Consulta.numeroIncidenciasMedia();
-        valores[10] = Consulta.numeroIncidenciasBaja();
         
-        session.setAttribute("informe", valores);
-        String url = "/informe.jsp";
+        String url;
+        String solicitudCierre = request.getParameter("notificacionCierre");
+        HttpSession sesion= (HttpSession) request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        
+        Incidencia incidencia = (Incidencia) sesion.getAttribute("incidencia");
+        incidencia.setResolucion(solicitudCierre);
+        //Actualizar solicitud en base de datos
+        Consulta.solicitarResolucion(incidencia);
+        url = "/vistaTecnico.jsp";
+        ArrayList <Incidencia> incidencias;
+        incidencias = Consulta.incidenciaTecnico(usuario.getUsuario());
+        sesion.setAttribute("incidencias", incidencias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

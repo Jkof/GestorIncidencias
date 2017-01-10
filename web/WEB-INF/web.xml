@@ -96,6 +96,14 @@
         <servlet-name>Cerrar</servlet-name>
         <servlet-class>servlet.Cerrar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Resolver</servlet-name>
+        <servlet-class>servlet.Resolver</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EnviarResolucion</servlet-name>
+        <servlet-class>servlet.EnviarResolucion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>Cerrar</servlet-name>
         <url-pattern>/Cerrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Resolver</servlet-name>
+        <url-pattern>/Resolver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnviarResolucion</servlet-name>
+        <url-pattern>/EnviarResolucion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
