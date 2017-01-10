@@ -82,7 +82,7 @@
                     <tr class="text-center">
                         <td><%=tecnicos.get(i).getNombre()%></td>
                         <td><%=tecnicos.get(i).getNumeroIncidencias()%></td>
-                        <td>0</td>
+                        <td><%=tecnicos.get(i).getNumeroNoResueltas()%></td>
                     </tr>
                     <%}%>
                 </table>

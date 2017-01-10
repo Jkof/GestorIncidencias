@@ -38,7 +38,7 @@ public class Consulta {
     private static final String LISTAR_INCIDENCIAS_ABIERTAS = "SELECT * FROM incidencia WHERE fechaCierre is NULL ORDER BY idIncidencia DESC";
     private static final String LISTAR_INCIDENCIAS_POR_USUARIO = "SELECT * FROM incidencia ORDER BY usuario";
     private static final String LISTAR_INCIDENCIAS_POR_TECNICO = "SELECT * FROM incidencia ORDER BY tecnico";
-    private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL, false,NULL)";
+    private static final String INSERTAR_INCIDENCIA = "INSERT INTO incidencia VALUES(?,?,?,?,?,?,?,NULL,NULL,False,NULL)";
     private static final String NUMERO_INCIDENCIAS = "SELECT COUNT(*) FROM incidencia";
     private static final String INFO_INCIDENCIA = "SELECT * FROM incidencia WHERE idIncidencia=?";
     private static final String TECNICOS_INCIDENCIAS = "SELECT tecnico, COUNT(*) FROM incidencia WHERE tecnico is NOT NULL GROUP BY tecnico";
@@ -56,8 +56,9 @@ public class Consulta {
     private static final String NUMERO_INCIDENCIAS_MEDIA = "SELECT COUNT(*) FROM incidencia WHERE prioridad='Media'";
     private static final String NUMERO_INCIDENCIAS_BAJA = "SELECT COUNT(*) FROM incidencia WHERE prioridad='Baja'";
     private static final String SOLICITAR_RESOLUCION = "UPDATE incidencia SET resolucion=?,resuelta=1 WHERE idIncidencia=?";
-    
-    
+    private static final String TECNICOS_RESUELTAS = "SELECT tecnico, COUNT(*) FROM incidencia WHERE resuelta=1 GROUP BY tecnico";;
+    private static final String TECNICOS_NO_RESUELTAS = "SELECT tecnico, COUNT(*) FROM incidencia WHERE resuelta=0 GROUP BY tecnico";;
+
     /**
      * Comprueba que el usuario y password esten el la base de datos
      *
@@ -510,7 +511,7 @@ public class Consulta {
             numeroIncidencias = resultado.getInt(1)+1;
             System.out.println(numeroIncidencias);
             //Insertamos un contenido
-            ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
+            
             //Creamos el ID
             String idIncidencia = "INC_";
             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -529,6 +530,7 @@ public class Consulta {
             }
             System.out.println(idIncidencia);
             incidencia.setIdentificador(idIncidencia);
+            ps = connection.prepareStatement(INSERTAR_INCIDENCIA);
             ps.setString(1, incidencia.getIdentificador());
             ps.setString(2, incidencia.getDescripcion());
             ps.setString(3, incidencia.getInventarioAfectado());
@@ -912,4 +914,38 @@ public class Consulta {
         } finally {
             pool.freeConnection(connection);
         }    }
+
+    public static ArrayList<Tecnico> infoTecnicoIncidencias() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps;
+        Tecnico tecnico;
+        
+        ArrayList<Tecnico> tecnicos = new ArrayList<>();
+        try {
+            ps = connection.prepareStatement(TECNICOS_RESUELTAS);
+            ResultSet resultado = ps.executeQuery();
+                System.out.println("Hay datos");
+                while(resultado.next()){
+                    tecnico = new Tecnico(resultado.getString(1), 
+                          resultado.getInt(2));  
+                    tecnicos.add(tecnico);
+                }
+                ps = connection.prepareStatement(TECNICOS_NO_RESUELTAS);
+                ResultSet result = ps.executeQuery();
+                System.out.println("Hay datos");
+                int i = 0;
+                while(resultado.next() && i<tecnicos.size()){
+                    tecnicos.get(i).setNumeroNoResueltas(result.getInt(2));
+                    i++;
+                }
+            System.out.println(tecnicos.size());
+                
+            return tecnicos;
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            pool.freeConnection(connection);
+        }
+    }
 }

@@ -12,6 +12,7 @@ package modelo;
 public class Tecnico {
     private String nombre;
     private int numeroIncidencias;
+    private int numeroNoResueltas;
     
     public Tecnico(String nombre, int numeroIncidencias){
         this.nombre = nombre;
@@ -32,6 +33,14 @@ public class Tecnico {
 
     public void setNumeroIncidencias(int numeroIncidencias) {
         this.numeroIncidencias = numeroIncidencias;
+    }
+
+    public int getNumeroNoResueltas() {
+        return numeroNoResueltas;
+    }
+
+    public void setNumeroNoResueltas(int numeroNoResueltas) {
+        this.numeroNoResueltas = numeroNoResueltas;
     }
     
     

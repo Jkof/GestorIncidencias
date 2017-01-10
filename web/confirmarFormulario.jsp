@@ -55,7 +55,6 @@
                 <div class="form-group col-md-6 col-md-offset-3">
                     <br><br>
                     <button type="submit" class="btn btn-success btn-lg col-lg-offset-0">Confirmar</button>
-                    <button type="submit" class="btn btn-success btn-lg col-lg-offset-2">Cancelar</button>
                 </div>
             </form>
         </div>

@@ -89,7 +89,6 @@
                 </div>
                 <div class="form-group col-md-6 col-md-offset-3">
                     <button type="submit" class="btn btn-success btn-lg col-md-4">Enviar</button>
-                    <button type="button" class="btn btn-success btn-lg col-md-offset-4 col-md-4">Cancelar</button> 
                 </div>
             </form>
         </div>

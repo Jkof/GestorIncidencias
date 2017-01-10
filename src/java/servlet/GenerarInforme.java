@@ -55,7 +55,7 @@ public class GenerarInforme extends HttpServlet {
         //Incidencias por tecnico(numero de incidencias por tecnico)
         HttpSession session;
         session = request.getSession();
-        ArrayList<Tecnico> tecnicos = Consulta.infoTecnico();
+        ArrayList<Tecnico> tecnicos = Consulta.infoTecnicoIncidencias();
         session.setAttribute("tecnicos", tecnicos);
         //Incidencias por tipo de incidencia
         valores[4] = Consulta.numeroIncidenciasHardware();

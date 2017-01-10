@@ -24,8 +24,7 @@
                 <label class="control-label">Mensaje de notificación de cierre:</label>
                 <textarea class="form-control" name="notificacionCierre" rows="4"></textarea>
                 <div class="col-md-12"><hr></div>
-                <button type="submit" class="btn btn-success btn-lg col-md-4">Enviar</button>
-                <button type="button" class="btn btn-success btn-lg col-md-offset-4 col-md-4">Cancelar</button>    
+                <button type="submit" class="btn btn-success btn-lg col-md-4">Enviar</button>  
         </form>
         </div>
             </div>
